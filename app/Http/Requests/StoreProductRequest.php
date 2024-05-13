@@ -23,10 +23,10 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'code' => 'required|string|max:50|unique:products,code',
-            'name' => 'required|string|max:250',
-            'quantity' => 'required|integer|min:1|max:10000',
-            'price' => 'required',
-            'description' => 'nullable|string'
+            'nombre' => 'required|string|max:250',
+            'cantidad' => 'required|integer|min:1|max:10000',
+            'precio' => 'required',
+            'descripcion' => 'nullable|string'
         ];
     }
 }

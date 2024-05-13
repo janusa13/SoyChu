@@ -15,6 +15,7 @@
             <div class="card-header">Lista de productos</div>
             <div class="card-body">
                 <a href="{{ route('products.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Añadir producto: </a>
+                <a href="" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Proveedores: </a>  
                 <table class="table table-striped table-bordered">
                     <thead>
                       <tr>
@@ -33,7 +34,7 @@
                             <td>{{ $product->code }}</td>
                             <td>{{ $product->nombre }}</td>
                             <td>{{ $product->cantidad }}</td>
-                            <td>{{ $product->precio }}</td>
+                            <td> ${{ $product->precio }}</td>
                             <td>
                                 <form action="{{ route('products.destroy', $product->id) }}" method="post">
                                     @csrf
