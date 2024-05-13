@@ -22,3 +22,5 @@ Route::get('/', function () {
 Route::resource('products', ProductController::class);
 
 Route::resource('sucursals',SucursalController::class);
+
+Route::get('/sucursal',[SucursalController::class,'index'])->name('sucursal.index');
