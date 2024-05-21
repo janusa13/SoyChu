@@ -19,7 +19,7 @@
                     <thead>
                       <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Direccion</th>
+                        <th scope="col">Diaaaareccion</th>
                         <th scope="col">Telefono</th>
                       </tr>
                     </thead>

@@ -4,6 +4,7 @@
 
 <div class="row justify-content-center mt-3">
     <div class="col-md-12">
+    <img src="..\..\images\soychulogo.png" alt="Soychu logotype">
 
         @if ($message = Session::get('success'))
             <div class="alert alert-success" role="alert">
@@ -19,10 +20,10 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th scope="col">S#</th>
+                        <th scope="col">Codigo</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Telefono</th>
+                        <th scope="col">Descripasdascion</th>
+                        <th scope="col">Cantidad</th>
                       </tr>
                     </thead>
                     <tbody>
