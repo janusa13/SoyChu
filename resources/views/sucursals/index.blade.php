@@ -14,16 +14,15 @@
         <div class="card">
             <div class="card-header">Lista de sucursales</div>
             <div class="card-body">
-                <a href="" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Añadir sucursal: </a>
+                <a href="{{ route('sucursals.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Añadir sucursal: </a>
                 <table class="table table-striped table-bordered">
                     <thead>
-                      <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Diaaaareccion</th>
-                        <th scope="col">Telefono</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Telefono</th>
+                        </tr>
                     </thead>
-
                     <tbody>
                         @forelse ($sucursals as $sucursal)
                         <tr>
@@ -38,7 +37,7 @@
 
                                     <a href="" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i>Informacion</a>
 
-                                    <a href="" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
+                                    <a href="{{ route('sucursals.edit', $sucursal->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
                                     
                                     <a href="" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i>Caja</a> 
 

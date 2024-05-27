@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Sucursal;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -18,19 +17,30 @@ class SucursalController extends Controller
         ]);
     }
 
-    public function create() : View
+    public function create() : View 
     {
         return view('sucursals.create');
     }
 
-    public function store(StoreSucursalRequest $request) : RedirectResponse
+    public function store(Request $request) : RedirectResponse //AGREGARLE LA VALIDACION DE STORESUCURSALREQUEST
     {
         Sucursal::create($request->all());
         return redirect()->route('sucursal.index')
                 ->withSucces('Sucursal agregada exitosamente');
-
     }
 
+    public function edit(Sucursal $sucursal) : View
+    {
+        return view('sucursals.edit', [
+            'sucursal' => $sucursal
+        ]);
+    }
 
-    
+    public function update(Request $request, Sucursal $sucursal) : RedirectResponse
+    {
+        $sucursal->update($request->all());
+        return redirect()->back()
+                ->withSuccess('Sucursal actualizada con exito.');
+    }
+
 }

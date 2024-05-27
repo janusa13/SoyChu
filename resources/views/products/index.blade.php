@@ -4,8 +4,6 @@
 
 <div class="row justify-content-center mt-3">
     <div class="col-md-12">
-    <img src="..\..\images\soychulogo.png" alt="Soychu logotype">
-
         @if ($message = Session::get('success'))
             <div class="alert alert-success" role="alert">
                 {{ $message }}
@@ -19,19 +17,20 @@
                 <a href="{{route ('sucursal.index')}}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Sucursales: </a>  
                 <table class="table table-striped table-bordered">
                     <thead>
-                      <tr>
-                        <th scope="col">Codigo</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Descripasdascion</th>
-                        <th scope="col">Cantidad</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @forelse ($products as $product)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $product->nombre }}</td>
-                            <td>{{ $product->nombre }}</td>
+                            <td>{{ $product->descripcion }}</td>
                             <td>{{ $product->cantidad }}</td>
                             <td> ${{ $product->precio }}</td>
                             <td>
