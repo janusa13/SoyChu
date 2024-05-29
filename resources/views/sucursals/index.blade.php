@@ -18,6 +18,7 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th scope="col">ID</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Direccion</th>
                             <th scope="col">Telefono</th>
@@ -31,7 +32,7 @@
                             <td>{{ $sucursal->direccion }}</td>
                             <td>{{ $sucursal->telefono }}</td>
                             <td>
-                                <form action="" method="post">
+                                <form action="{{ route('sucursals.destroy', $sucursal->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
 

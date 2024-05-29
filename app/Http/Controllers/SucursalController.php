@@ -43,4 +43,11 @@ class SucursalController extends Controller
                 ->withSuccess('Sucursal actualizada con exito.');
     }
 
+        public function destroy(Sucursal $sucursal) : RedirectResponse
+    {
+        $sucursal->delete();
+        return redirect()->route('sucursals.index')
+                ->withSuccess('Sucursal borrada exitosamente.');
+    }
+
 }

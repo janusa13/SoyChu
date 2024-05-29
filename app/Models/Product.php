@@ -17,4 +17,9 @@ class Product extends Model
         'precio',
         'descripcion'
     ];
+
+        public function envios()
+    {
+        return $this->hasMany(Envio::class);
+    }
 }

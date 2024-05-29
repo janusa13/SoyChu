@@ -16,4 +16,8 @@ class Sucursal extends Model
         'telefono'
 
     ];
+        public function envios()
+    {
+        return $this->hasMany(Envio::class);
+    }
 }

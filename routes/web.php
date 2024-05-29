@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\EnvioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,7 @@ Route::get('/', function () {
 Route::resource('products', ProductController::class);
 
 Route::resource('sucursals',SucursalController::class);
+
+Route::resource('envios', EnvioController::class);
 
 Route::get('/sucursal',[SucursalController::class,'index'])->name('sucursal.index');
