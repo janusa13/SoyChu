@@ -1,4 +1,4 @@
-@extends('envios.layouts')
+@extends('../dashboard')
 
 @section('content')
 <div class="container">

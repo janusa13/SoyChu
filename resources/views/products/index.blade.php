@@ -1,4 +1,4 @@
-@extends('products.layouts')
+@extends('../dashboard')
 
 @section('content')
 
@@ -14,8 +14,6 @@
             <div class="card-header">Lista de productos</div>
             <div class="card-body">
                 <a href="{{ route('products.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Añadir producto: </a>
-                <a href="{{route ('sucursal.index')}}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Sucursales: </a> 
-                <a href="{{ route('envios.index') }}" class="btn btn-info btn-sm my-2"><i class="bi bi-truck"></i> Ver Envíos</a>
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>

@@ -1,5 +1,4 @@
-@extends('envios.layouts')
-
+@extends('../dashboard')
 @section('content')
 <div class="container">
     <h1>Registrar Envío</h1>

@@ -1,4 +1,4 @@
-@extends('products.layouts')
+@extends('../dashboard')
 
 @section('content')
 
