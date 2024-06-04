@@ -11,24 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sucursals', function (Blueprint $table) {
+        Schema::create('factura',function(Bluepint $table){
             $table->id();
-            $table->string('nombre');
-            $table->string('direccion');
-            $table->string('turno_mañana');
-            $table->string('turno_siesta');
-            $table->string('turno_tarde');
-            $table->string('telefono');
+            $table->string('proveedor');
+            $table->string('condicion_pago');
+            $table->string('numero');
+            $table->date('fecha');
+            $table->date('fecha_vencimiento');
             $table->timestamps();
         });
     }
 
-    
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('sucursals');
+        //
     }
 };

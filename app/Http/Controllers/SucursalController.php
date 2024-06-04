@@ -17,6 +17,13 @@ class SucursalController extends Controller
         ]);
     }
 
+    public function show(Sucursal $sucursal) : View
+    {
+        return view('sucursals.show', [
+            'sucursal' => $sucursal
+        ]);
+    }
+
     public function create() : View 
     {
         return view('sucursals.create');
