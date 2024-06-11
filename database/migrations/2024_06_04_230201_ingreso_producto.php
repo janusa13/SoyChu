@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('ingresoProducto', function (Blueprint $table){
         $table->id();
-        $table->string('descripcion');
-        $table->string('id_producto'); // HACER LA RELACION ACA!! corrigiendo el tipo de datos y agregandolo al modelo.
-        $table->string('id_factura'); //HACER LA RELACION ACA!!! corrigiendo el tipo de datos y agregandolo al modelo.
-        $table->decimal('Kilos por unidad', 8, 2);
-        $table->integer('Cantidad CJ');
+        $table->foreignId('productID')->constrained('products')->onDelete('cascade'); // HACER LA RELACION ACA!! corrigiendo el tipo de datos y agregandolo al modelo.
+        $table->foreignId('facturaID')->constrained('factura')->onDelete('cascade'); //HACER LA RELACION ACA!!! corrigiendo el tipo de datos y agregandolo al modelo.
+        $table->decimal('KilosPorUnidad', 8, 2);
+        $table->integer('CantidadCJ');
         $table->decimal('Kilos', 8, 2);
         $table->decimal('precio', 8, 2);
         $table->timestamps();
+        });
     }
 
     /**

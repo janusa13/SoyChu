@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('factura',function(Bluepint $table){
+        Schema::create('factura', function (Blueprint $table){
             $table->id();
             $table->string('proveedor');
             $table->string('condicion_pago');

@@ -3,8 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\EnvioController;
+use App\Http\Controllers\FacturaController;
 
 
 /*
@@ -35,10 +37,17 @@ Route::resource('products', ProductController::class);
 
 Route::resource('sucursals',SucursalController::class);
 
+Route::resource('proveedors',ProveedorController::class);
+
 Route::resource('envios', EnvioController::class);
 
 Route::get('/sucursal',[SucursalController::class,'index'])->name('sucursal.index');
 
+Route::get('/proveedor',[ProveedorController::class,'index']);
+
+Route::get('/factura',[FacturaController::class,'create'])->name('factura.create');
+
+Route::post('/factura/ingreso',[FacturaController::class,'store'])->name('factura.store');
 
 });
 

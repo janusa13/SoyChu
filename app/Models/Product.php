@@ -11,15 +11,16 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code',
-        'nombre',
-        'cantidad',
-        'precio',
         'descripcion'
     ];
 
         public function envios()
     {
         return $this->hasMany(Envio::class);
+    }
+
+        public function ingresoProductos()
+    {
+        return $this->hasMany(IngresoProducto::class, 'productID');
     }
 }

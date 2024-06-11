@@ -21,6 +21,12 @@
                     <x-nav-link :href="route('envios.index')" :active="request()->routeIs('envios.index')">
                         {{ __('Envios') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('proveedors.index')" :active="request()->routeIs('proveedors.index')">
+                        {{ __('Proveedores') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('factura.create')" :active="request()->routeIs('factura.create')">
+                        {{ __('Registrar entrada de Stock') }}
+                    </x-nav-link>
                 </div>
             </div>
 

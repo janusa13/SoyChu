@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\IngresoProducto;
+
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
@@ -15,8 +18,17 @@ class ProductController extends Controller
      */
     public function index() : View
     {
+        
+        $products = Product::latest()->paginate(6);
+
+        
+        foreach ($products as $product) {
+            $product->totalCantidadCJ = IngresoProducto::where('productID', $product->id)->sum('CantidadCJ');
+            $product->totalKilos = IngresoProducto::where('productID', $product->id)->sum('Kilos');
+        }
+
         return view('products.index', [
-            'products' => Product::latest()->paginate(6)
+            'products' => $products
         ]);
     }
 

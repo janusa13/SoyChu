@@ -11,21 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sucursals', function (Blueprint $table) {
+        Schema::create('proveedors', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('direccion');
             $table->string('telefono');
             $table->timestamps();
         });
     }
 
-    
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('sucursals');
+        //
     }
 };
