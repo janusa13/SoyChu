@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('telefono');
+            $table->string('direccionComercial');
+            $table->string('CUIT');
+            $table->string('ciudad');
             $table->timestamps();
         });
     }

@@ -12,6 +12,9 @@ class Proveedor extends Model
 
         protected $fillable = [
         'nombre',
-        'telefono'
+        'telefono',
+        'direccionComercial',
+        'CUIT',
+        'ciudad'
     ];
 }

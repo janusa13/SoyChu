@@ -66,7 +66,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="kilosPorUnidad" class="form-label">Kilos por unidad:</label>
-                            <input type="number" name="kilosPorUnidad[]" class="form-control" required>
+                            <input type="number" name="kilosPorUnidad[]" id="kilosPorUnidad" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -75,13 +75,13 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="cantidadCJ" class="form-label">Cantidad CJ:</label>
-                            <input type="number" name="cantidadCJ[]" class="form-control" required>
+                            <input type="number" name="cantidadCJ[]" id="cantidadCJ" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="kilosTotal" class="form-label">Kilos Total:</label>
-                            <input type="number" name="kilosTotal[]" class="form-control" required>
+                            <input type="number" name="kilosTotal[]"   id="kilosTotal" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -102,29 +102,5 @@
         <button type="submit" class="btn btn-primary">Registrar Factura</button>
     </form>
 </div>
-
-<script>
-    document.getElementById('add-producto').addEventListener('click', function() {
-        var container = document.getElementById('productos-container');
-        var newProduct = container.children[0].cloneNode(true);
-        var inputs = newProduct.getElementsByTagName('input');
-        var selects = newProduct.getElementsByTagName('select');
-
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].value = '';
-        }
-        for (var i = 0; i < selects.length; i++) {
-            selects[i].selectedIndex = 0;
-        }
-
-        container.appendChild(newProduct);
-    });
-
-    document.getElementById('remove-producto').addEventListener('click', function() {
-        var container = document.getElementById('productos-container');
-        if (container.children.length > 1) {
-            container.removeChild(container.lastChild);
-        }
-    });
-</script>
+@vite('resources/js/app.js')
 @endsection

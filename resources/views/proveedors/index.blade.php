@@ -19,6 +19,9 @@
                         <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Telefono</th>
+                            <th scope="col">Direccion Comercial</th>
+                            <th scope="col">CUIT</th>
+                            <th scope="col">Cuidad</th>
 
                         </tr>
                     </thead>
@@ -27,6 +30,9 @@
                         <tr>
                             <td>{{ $proveedor->nombre }}</td>
                             <td>{{ $proveedor->telefono }}</td>
+                             <td>{{ $proveedor->direccionComercial }}</td>
+                              <td>{{ $proveedor->CUIT }}</td>
+                               <td>{{ $proveedor->ciudad }}</td>
                             <td>
                                 <form action="{{ route('proveedors.destroy', $proveedor->id) }}" method="post">
                                     @csrf
