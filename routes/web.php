@@ -7,6 +7,7 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\EnvioController;
 use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\ClienteController;
 
 
 /*
@@ -40,6 +41,8 @@ Route::resource('sucursals',SucursalController::class);
 Route::resource('proveedors',ProveedorController::class);
 
 Route::resource('envios', EnvioController::class);
+
+Route::resource('clientes', ClienteController::class);
 
 Route::get('/sucursal',[SucursalController::class,'index'])->name('sucursal.index');
 

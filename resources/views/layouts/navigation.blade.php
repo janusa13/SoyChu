@@ -18,6 +18,9 @@
                      <x-nav-link :href="route('sucursal.index')" :active="request()->routeIs('sucursal.index')">
                         {{ __('Sucursales') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('factura.create')">
+                        {{ __('Clientes') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('envios.index')" :active="request()->routeIs('envios.index')">
                         {{ __('Envios') }}
                     </x-nav-link>
