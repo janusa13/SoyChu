@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\IngresoProducto;
 use App\Models\Sucursal;
 use App\Models\Envio;
 use Illuminate\Http\RedirectResponse;
@@ -19,7 +20,7 @@ class EnvioController extends Controller
 
     public function create() : View
     {
-        $products = Product::all();
+        $products = Producto::all();
         $sucursals = Sucursal::all();
         return view('envios.create', compact('products', 'sucursals'));
     }
