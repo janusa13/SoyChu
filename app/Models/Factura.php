@@ -22,4 +22,14 @@ class Factura extends Model
     {
         return $this->hasMany(IngresoProducto::class, 'facturaID');
     }
+
+        public function productos()
+    {
+        return $this->hasMany(Producto::class);
+    }
+
+        public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
 }

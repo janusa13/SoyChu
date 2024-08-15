@@ -7,20 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $table ='products';
     use HasFactory;
+
+    protected $table = 'products';
 
     protected $fillable = [
         'descripcion'
     ];
 
-        public function envios()
+    public function envios()
     {
         return $this->hasMany(Envio::class);
     }
 
-        public function ingresoProductos()
+    public function ingresoProductos()
     {
-        return $this->hasMany(IngresoProducto::class, 'productID');
+        return $this->hasMany(IngresoProducto::class, 'product_id');
     }
 }

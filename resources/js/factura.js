@@ -1,5 +1,5 @@
 
-function calcularKilosTotal(product) {
+/*function calcularKilosTotal(product) {
     let kilosPorUnidad = product.querySelector('.kilosPorUnidad');
     let cantidadCJ = product.querySelector('.cantidadCJ');
     let kilosTotal = product.querySelector('.kilosTotal');
@@ -20,10 +20,10 @@ function calcularKilosTotal(product) {
     }else{
         console.log(kilosTotal.value)
     }
-}
+}*/
 
     let products = document.getElementsByClassName('producto');
-    Array.from(products).forEach(calcularKilosTotal);
+    //Array.from(products).forEach(calcularKilosTotal);
 
     document.getElementById('add-producto').addEventListener('click', function() {
         let container = document.getElementById('productos-container');
@@ -39,7 +39,7 @@ function calcularKilosTotal(product) {
         }
 
         container.appendChild(newProduct);
-        calcularKilosTotal(newProduct);
+        //calcularKilosTotal(newProduct);
     
     });
 
