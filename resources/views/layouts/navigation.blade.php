@@ -27,6 +27,12 @@
                     <x-nav-link :href="route('proveedors.index')" :active="request()->routeIs('proveedors.index')">
                         {{ __('Proveedores') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('factura.create')">
+                        {{ __('Clientes') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('facturaCliente.create')" :active="request()->routeIs('facturaCliente.create')">
+                        {{ __('Generar Factura') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('factura.create')" :active="request()->routeIs('factura.create')">
                         {{ __('Registrar entrada de Stock') }}
                     </x-nav-link>

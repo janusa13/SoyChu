@@ -23,6 +23,7 @@
 }*/
 
     let products = document.getElementsByClassName('producto');
+    //Array.from(products).forEach(calcularKilosTotal);
 
     document.getElementById('add-producto').addEventListener('click', function() {
         let container = document.getElementById('productos-container');
@@ -38,7 +39,7 @@
         }
 
         container.appendChild(newProduct);
-        calcularKilosTotal(newProduct);
+        //calcularKilosTotal(newProduct);
     
     });
 
