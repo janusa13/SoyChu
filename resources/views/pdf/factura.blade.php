@@ -136,14 +136,14 @@
                     </div>
                     <div class="row">
                         <p class="col-6">
-                            <strong>Condición Frente al IVA:</strong> {{ $cliente->condicion_iva }}
+                            <strong>Condición Frente al IVA:</strong> Consumidor final
                         </p>
                         <p class="col-6">
-                            <strong>Domicilio:</strong> {{ $cliente->domicilio }}
+                            <strong>Domicilio:</strong> {{ $cliente->calleYNumero }}
                         </p>
                     </div>
                     <p>
-                        <strong>Condición de venta:</strong> {{ $factura->condicion_venta }}
+                        <strong>Condición de venta:</strong> {{ $factura->categoriaIVA }}
                     </p>
                 </div>
             </td>
@@ -164,11 +164,13 @@
                         </tr>
                     @foreach ($productos as $producto)
                         <tr>
+                            <td>{{ $producto->producto->id }}</td>
                             <td>{{ $producto->producto->descripcion }}</td>
                             <td>{{ $producto->kilos_por_unidad }}</td>
-                            <td>{{ $producto->cantidad_cj }}</td>
-                            <td>{{ $producto->kilos_total }}</td>
+                            <td>Unidad</td>
                             <td>{{ $producto->precio }}</td>
+                            <td>no def.</td>
+                            <td>no def.</td>
                             <td>{{ $producto->precio * $producto->cantidad_cj }}</td>
                         </tr>
                     @endforeach
