@@ -186,7 +186,7 @@
                             <strong>Total:</strong>
                         </p>
                         <p class="col-6">
-                            <strong>{{ $factura->total }}</strong>
+                            <strong>{{ $factura->facturaTotal }}</strong>
                         </p>
                     </div>
                 </div>

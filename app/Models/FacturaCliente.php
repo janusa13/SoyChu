@@ -17,6 +17,7 @@ class FacturaCliente extends Model
         'condicion_pago',
         'fecha',
         'fecha_vencimiento',
+        'facturaTotal'
     ];
 
     public function cliente()
