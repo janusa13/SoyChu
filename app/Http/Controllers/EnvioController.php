@@ -35,7 +35,8 @@ class EnvioController extends Controller
 
         $product = Product::findOrFail($request->product_id);
 
-        if ($product->cantidad < $request->cantidad) {
+        $product->totalCantidadCJ = IngresoProducto::where('productID', $product->id)->sum('CantidadCJ');
+        if ($product->totalCantidadCJ < $request->cantidad) {
             return redirect()->back()->withErrors('No hay suficiente stock para este producto.');
         }
 

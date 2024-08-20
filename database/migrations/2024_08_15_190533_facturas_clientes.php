@@ -11,24 +11,22 @@ return new class extends Migration
      */
     public function up()
     {
-        // Crear la tabla `facturas_clientes`
+        
         Schema::create('facturas_clientes', function (Blueprint $table) {
             $table->id();
-            // Definir la clave foránea hacia la tabla `clientes`
             $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');
             $table->string('numero');
             $table->string('condicion_pago');
             $table->date('fecha');
             $table->date('fecha_vencimiento');
+            $table->float('facturaTotal');
             $table->timestamps();
         });
 
-        // Crear la tabla `factura_cliente_producto`
+        
         Schema::create('factura_cliente_productos', function (Blueprint $table) {
             $table->id();
-            // Definir la clave foránea hacia la tabla `facturas_clientes`
             $table->foreignId('factura_cliente_id')->constrained('facturas_clientes')->onDelete('cascade');
-            // Definir la clave foránea hacia la tabla `products`
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->integer('kilos_por_unidad');
             $table->integer('cantidad_cj');

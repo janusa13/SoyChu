@@ -78,12 +78,6 @@
                             <input type="number" name="cantidadCJ[]" id="cantidadCJ" class="form-control" required>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="kilosTotal" class="form-label">Kilos Totales:</label>
-                            <input type="number" name="kilosTotal[]" id="kilosTotal" class="form-control" required>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="row">
