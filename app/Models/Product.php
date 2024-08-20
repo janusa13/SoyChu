@@ -12,7 +12,8 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'descripcion'
+        'descripcion',
+        'cantidad'
     ];
 
     public function envios()

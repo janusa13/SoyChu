@@ -37,8 +37,13 @@ class FacturaController extends Controller
             $producto->cantidadCJ = $request->cantidadCJ[$i];
             $producto->kilos = $request->kilosTotal[$i];
             $producto->precio = $request->precio[$i];
+            
             $producto->save();
+            $product = Product::findOrFail($request->productId);
+            $product->cantidad = IngresoProducto::where('productID', $producto->id)->sum('CantidadCJ');
         }
+        
+        
         return redirect()->route('products.index')->with('success', 'Factura registrada con éxito.');
     }
 }

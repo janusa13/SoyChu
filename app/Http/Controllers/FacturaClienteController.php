@@ -34,7 +34,6 @@ public function store(Request $request)
         'precio' => 'required|array'
     ]);
 
-    // Verificar stock para cada producto
     foreach ($request->product_id as $key => $productId) {
         $product = Product::findOrFail($productId);
         $cantidadSolicitada = $request->cantidadCJ[$key];
@@ -45,7 +44,6 @@ public function store(Request $request)
         }
     }
 
-    // Crear la factura
     $factura = FacturaCliente::create([
         'cliente_id' => $request->cliente,
         'numero' => $request->numero,
@@ -57,18 +55,15 @@ public function store(Request $request)
 
     $totalFactura = 0;
 
-    // Procesar cada producto
     foreach ($request->product_id as $key => $productId) {
         $product = Product::findOrFail($productId);
         $cantidadSolicitada = $request->cantidadCJ[$key];
 
-        // Restar la cantidad vendida del stock
         $product->decrement('cantidad', $cantidadSolicitada);
 
         $subtotal = $request->precio[$key] * $cantidadSolicitada;
         $totalFactura += $subtotal;
 
-        // Crear el registro del producto en la factura
         FacturaClienteProducto::create([
             'factura_cliente_id' => $factura->id,
             'product_id' => $productId,
@@ -78,8 +73,7 @@ public function store(Request $request)
             'precio' => $request->precio[$key]
         ]);
     }
-
-    // Actualizar el total de la factura
+    
     $factura->update(['facturaTotal' => $totalFactura]);
 
     return redirect()->route('facturaCliente.generatePDF', ['facturaId' => $factura->id]);
