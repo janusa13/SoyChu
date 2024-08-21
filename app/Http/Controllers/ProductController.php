@@ -21,7 +21,7 @@ class ProductController extends Controller
 
         
         foreach ($products as $product) {
-           
+        
             $product->totalKilos = IngresoProducto::where('productID', $product->id)->sum('Kilos');
         }
 
@@ -30,13 +30,13 @@ class ProductController extends Controller
         ]);
     }
 
- 
+
     public function create() : View
     {
         return view('products.create');
     }
 
- 
+
     public function store(StoreProductRequest $request) : RedirectResponse
     {
         Product::create($request->all());
@@ -44,7 +44,6 @@ class ProductController extends Controller
                 ->withSuccess('New product is added successfully.');
     }
 
- 
     public function show(Product $product) : View
     {
         return view('products.show', [
@@ -52,7 +51,7 @@ class ProductController extends Controller
         ]);
     }
 
- 
+
     public function edit(Product $product) : View
     {
         return view('products.edit', [

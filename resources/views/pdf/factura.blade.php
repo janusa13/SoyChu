@@ -166,7 +166,7 @@
                         <tr>
                             <td>{{ $producto->producto->id }}</td>
                             <td>{{ $producto->producto->descripcion }}</td>
-                            <td>{{ $producto->kilos_por_unidad }}</td>
+                            <td>{{ $producto->cantidad_cj }}</td>
                             <td>Unidad</td>
                             <td>{{ $producto->precio }}</td>
                             <td>no def.</td>

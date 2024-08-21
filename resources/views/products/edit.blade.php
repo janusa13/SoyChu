@@ -1,7 +1,5 @@
 @extends('../dashboard')
-
 @section('content')
-
 <div class=" row justify-content-center mt-3">
     <div class="col-md-8">
 
@@ -43,5 +41,5 @@
         </div>
     </div>    
 </div>
-    
+@vite('resources/js/appAux.js')
 @endsection

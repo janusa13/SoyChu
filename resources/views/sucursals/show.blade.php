@@ -40,5 +40,5 @@
         </div>
     </div>    
 </div>
-    
+@vite('resources/js/appAux.js')
 @endsection

@@ -43,4 +43,5 @@
         <button type="submit" class="btn btn-primary">Registrar Envío</button>
     </form>
 </div>
+@vite('resources/js/appAux.js')
 @endsection

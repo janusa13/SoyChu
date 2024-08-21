@@ -1,5 +1,4 @@
 @extends('../dashboard')
-
 @section('content')
 
 <div class="row justify-content-center mt-3">
@@ -20,7 +19,6 @@
                             <th scope="col">N.</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Total Cantidad CJ</th>
-                            <th scope="col">Total Kilos</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -30,7 +28,6 @@
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $product->descripcion }}</td>
                             <td>{{ $product->cantidad }}</td>
-                            <td>{{ $product->totalKilos }}</td>
                             <td>
                                 <form action="{{ route('products.destroy', $product->id) }}" method="post">
                                     @csrf
@@ -57,5 +54,5 @@
         </div>
     </div>    
 </div>
-    
+@vite('resources/js/appAux.js')
 @endsection
