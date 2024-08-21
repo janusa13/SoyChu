@@ -18,7 +18,7 @@
                      <x-nav-link :href="route('sucursal.index')" :active="request()->routeIs('sucursal.index')">
                         {{ __('Sucursales') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('factura.create')">
+                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.index')">
                         {{ __('Clientes') }}
                     </x-nav-link>
                     <x-nav-link :href="route('envios.index')" :active="request()->routeIs('envios.index')">
@@ -27,9 +27,7 @@
                     <x-nav-link :href="route('proveedors.index')" :active="request()->routeIs('proveedors.index')">
                         {{ __('Proveedores') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('factura.create')">
-                        {{ __('Clientes') }}
-                    </x-nav-link>
+
                     <x-nav-link :href="route('facturaCliente.create')" :active="request()->routeIs('facturaCliente.create')">
                         {{ __('Generar Factura') }}
                     </x-nav-link>

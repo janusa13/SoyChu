@@ -29,7 +29,7 @@
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $product->descripcion }}</td>
-                            <td>{{ $product->totalCantidadCJ }}</td>
+                            <td>{{ $product->cantidad }}</td>
                             <td>{{ $product->totalKilos }}</td>
                             <td>
                                 <form action="{{ route('products.destroy', $product->id) }}" method="post">
