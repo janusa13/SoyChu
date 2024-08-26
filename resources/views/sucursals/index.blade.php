@@ -35,9 +35,6 @@
                                     @method('DELETE')
                                     <a href="{{ route('sucursals.show', $sucursal->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i>Informacion</a>
                                     <a href="{{ route('sucursals.edit', $sucursal->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
-                                    <a href="" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i>Caja</a> 
-                                    <a href="" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i>Stock</a> 
-                                    
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Quieres borrar este producto?');"><i class="bi bi-trash"></i> Borrar</button>
                                 </form>
                             </td>

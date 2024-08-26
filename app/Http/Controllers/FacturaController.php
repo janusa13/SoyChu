@@ -23,7 +23,7 @@ class FacturaController extends Controller
     {
  
         $factura = new Factura();
-        $factura->proveedor = $request->proveedor;
+        $factura->proveedor_id = $request->proveedor;
         $factura->numero = $request->numero;
         $factura->condicion_pago = $request->condicion_pago;
         $factura->fecha = $request->fecha;
@@ -38,7 +38,7 @@ class FacturaController extends Controller
             $productoIngreso->productID = $request->product_id[$i];
             $productoIngreso->kilosPorUnidad = $request->kilosPorUnidad[$i];
             $productoIngreso->cantidadCJ = $request->cantidadCJ[$i];
-            $productoIngreso->kilos = $request->kilosTotal[$i];
+            $productoIngreso->kilos = $request->kilosPorUnidad[$i] *  $request->cantidadCJ[$i] ;
             $productoIngreso->precio = $request->precio[$i];
             $productoIngreso->save();
  

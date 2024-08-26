@@ -11,6 +11,7 @@ class IngresoProducto extends Model
 
     protected $table ='ingresoproducto';
 
+
         public function factura()
     {
         return $this->belongsTo(Factura::class, 'facturaID');
@@ -18,7 +19,7 @@ class IngresoProducto extends Model
 
     public function producto()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(Product::class, 'id'); // Especifica 'productID' aquí
     }
 
 

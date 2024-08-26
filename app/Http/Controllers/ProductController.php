@@ -20,10 +20,6 @@ class ProductController extends Controller
         $products = Product::latest()->paginate(6);
 
         
-        foreach ($products as $product) {
-        
-            $product->totalKilos = IngresoProducto::where('productID', $product->id)->sum('Kilos');
-        }
 
         return view('products.index', [
             'products' => $products
@@ -59,7 +55,7 @@ class ProductController extends Controller
         ]);
     }
 
- 
+
     public function update(UpdateProductRequest $request, Product $product) : RedirectResponse
     {
         $product->update($request->all());
@@ -67,11 +63,29 @@ class ProductController extends Controller
                 ->withSuccess('Product is updated successfully.');
     }
 
- 
+
     public function destroy(Product $product) : RedirectResponse
     {
         $product->delete();
         return redirect()->route('products.index')
                 ->withSuccess('Product is deleted successfully.');
     }
+
+public function movimientos($id)
+{
+    // Obtener el producto con sus relaciones
+    $product = Product::with([
+        'ingresoProductos.factura.proveedor',
+        'envios.sucursal',
+        'facturaClienteProductos.facturaCliente.cliente'
+    ])->findOrFail($id);
+
+    // Pasar las relaciones a la vista
+    return view('products.movimientos', [
+        'product' => $product,
+        'ingresoProductos' => $product->ingresoProductos,
+        'envios' => $product->envios,
+        'facturaClienteProductos' => $product->facturaClienteProductos
+    ]);
+}
 }

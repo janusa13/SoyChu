@@ -12,17 +12,23 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
+        'id',
         'descripcion',
         'cantidad'
     ];
 
-    public function envios()
-    {
-        return $this->hasMany(Envio::class);
-    }
+public function facturaClienteProductos()
+{
+    return $this->hasMany(FacturaClienteProducto::class, 'product_id');
+}
 
-    public function ingresoProductos()
-    {
-        return $this->hasMany(IngresoProducto::class, 'product_id');
-    }
+public function ingresoproductos()
+{
+    return $this->hasMany(IngresoProducto::class, 'productID');
+}
+
+public function envios()
+{
+    return $this->hasMany(Envio::class, 'product_id');
+}
 }

@@ -11,7 +11,7 @@ class Factura extends Model
         protected $table ='factura';
 
         protected $fillable = [
-        'proveedor',
+        'proveedor_id',
         'condicion_pago',
         'numero',
         'fecha',
@@ -31,5 +31,10 @@ class Factura extends Model
         public function cliente()
     {
         return $this->belongsTo(Cliente::class);
+    }
+
+        public function proveedor()
+    {
+        return $this->belongsTo(Proveedor::class, 'proveedor_id'); 
     }
 }

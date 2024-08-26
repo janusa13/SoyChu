@@ -20,7 +20,7 @@ class EnvioController extends Controller
 
     public function create() : View
     {
-        $products = Producto::all();
+        $products = Product::all();
         $sucursals = Sucursal::all();
         return view('envios.create', compact('products', 'sucursals'));
     }
@@ -36,8 +36,8 @@ class EnvioController extends Controller
 
         $product = Product::findOrFail($request->product_id);
 
-        $product->totalCantidadCJ = IngresoProducto::where('productID', $product->id)->sum('CantidadCJ');
-        if ($product->totalCantidadCJ < $request->cantidad) {
+        
+        if ($product->cantidad < $request->cantidad) {
             return redirect()->back()->withErrors('No hay suficiente stock para este producto.');
         }
 

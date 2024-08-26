@@ -59,6 +59,8 @@ Route::post('/facturaClientePost',[FacturaClienteController::class, 'store'])->n
 
 Route::get('/factura/{facturaId}/pdf', [FacturaClienteController::class, 'generatePDF'])->name('facturaCliente.generatePDF');
 
+Route::get('products/{id}/movimientos', [ProductController::class, 'movimientos'])->name('products.movimientos');
+
 });
 
 require __DIR__.'/auth.php';
