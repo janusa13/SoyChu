@@ -30,9 +30,7 @@ class FacturaController extends Controller
         $factura->fecha_vencimiento = $request->fecha_vencimiento;
         $factura->save();
 
- 
         for ($i = 0; $i < count($request->product_id); $i++) {
- 
             $productoIngreso = new IngresoProducto();
             $productoIngreso->facturaID = $factura->id;
             $productoIngreso->productID = $request->product_id[$i];
@@ -41,7 +39,6 @@ class FacturaController extends Controller
             $productoIngreso->kilos = $request->kilosPorUnidad[$i] *  $request->cantidadCJ[$i] ;
             $productoIngreso->precio = $request->precio[$i];
             $productoIngreso->save();
- 
             $product = Product::findOrFail($request->product_id[$i]);
             $product->increment('cantidad', $request->cantidadCJ[$i]);  
         }

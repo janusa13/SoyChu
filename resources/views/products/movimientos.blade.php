@@ -29,7 +29,7 @@
                             <th scope="col">Cantidad CJ</th>
                             <th scope="col">Proveedor</th>
                             <th scope="col">Fecha</th>
-                        </tr>
+                        </tr>0
                     </thead>
                     <tbody>
                         @forelse ($ingresoProductos as $ingreso)
@@ -107,6 +107,8 @@
                                 <td>{{ $facturaClienteProducto->precio }}</td>
                                 <td>{{ $facturaClienteProducto->cantidad_cj * $facturaClienteProducto->precio }}</td>
                                 <td>{{ $facturaClienteProducto->facturaCliente->fecha }}</td>
+                                <td><a href="{{ route('facturaCliente.generatePDF', $facturaClienteProducto->facturaCliente->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Generar Factura</a></td>
+
                             </tr>
                         @empty
                             <tr>
