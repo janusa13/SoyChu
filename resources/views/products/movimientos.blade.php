@@ -9,17 +9,13 @@
                 {{ $message }}
             </div>
         @endif
-
         <div class="card">
             <div class="card-header">Movimientos del Producto: {{ $product->descripcion }}</div>
             <div class="card-body">
-                <h5>Detalles del Producto</h5>
+                <h5 class="card-title">Detalles del Producto</h5>
                 <p><strong>Descripción:</strong> {{ $product->descripcion }}</p>
                 <p><strong>Cantidad Total:</strong> {{ $product->cantidad }}</p>
-
                 <hr>
-
-                <!-- Ingresos de Stock -->
                 <h5>Ingresos de Stock</h5>
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -29,7 +25,7 @@
                             <th scope="col">Cantidad CJ</th>
                             <th scope="col">Proveedor</th>
                             <th scope="col">Fecha</th>
-                        </tr>0
+                        </tr>
                     </thead>
                     <tbody>
                         @forelse ($ingresoProductos as $ingreso)
@@ -49,10 +45,7 @@
                         @endforelse
                     </tbody>
                 </table>
-
                 <hr>
-
-                <!-- Envíos -->
                 <h5>Envíos</h5>
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -80,10 +73,7 @@
                         @endforelse
                     </tbody>
                 </table>
-
                 <hr>
-
-                <!-- Facturas Generadas -->
                 <h2>Facturas Generadas</h2>
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -108,7 +98,6 @@
                                 <td>{{ $facturaClienteProducto->cantidad_cj * $facturaClienteProducto->precio }}</td>
                                 <td>{{ $facturaClienteProducto->facturaCliente->fecha }}</td>
                                 <td><a href="{{ route('facturaCliente.generatePDF', $facturaClienteProducto->facturaCliente->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Generar Factura</a></td>
-
                             </tr>
                         @empty
                             <tr>
@@ -119,13 +108,10 @@
                         @endforelse
                     </tbody>
                 </table>
-
                 <hr>
-
                 <a href="{{ route('products.index') }}" class="btn btn-primary">Volver a Productos</a>
             </div>
         </div>
     </div>    
 </div>
-
 @endsection

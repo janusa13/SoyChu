@@ -23,7 +23,7 @@
                             @forelse ($envios as $envio)
                             <tr>
                                 <th scope="row">{{ $envio->id }}</th>
-                                <td>{{ $envio->product->nombre }}</td>
+                                <td>{{ $envio->product->descripcion }}</td>
                                 <td>{{ $envio->sucursal->nombre }}</td>
                                 <td>{{ $envio->cantidad }}</td>
                                 <td>{{ $envio->enviado_at }}</td>

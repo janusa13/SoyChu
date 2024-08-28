@@ -73,14 +73,12 @@ class ProductController extends Controller
 
 public function movimientos($id)
 {
-    // Obtener el producto con sus relaciones
     $product = Product::with([
         'ingresoProductos.factura.proveedor',
         'envios.sucursal',
         'facturaClienteProductos.facturaCliente.cliente'
     ])->findOrFail($id);
 
-    // Pasar las relaciones a la vista
     return view('products.movimientos', [
         'product' => $product,
         'ingresoProductos' => $product->ingresoProductos,

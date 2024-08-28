@@ -143,7 +143,7 @@
                         </p>
                     </div>
                     <p>
-                        <strong>Condición de venta:</strong> {{ $factura->categoriaIVA }}
+                        <strong>Condición de venta:</strong> {{ $factura->condicion_pago}}
                     </p>
                 </div>
             </td>
