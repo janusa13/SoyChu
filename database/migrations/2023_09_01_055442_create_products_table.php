@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('descripcion');
             $table->float('cantidad')->default(0);
+            $table->enum('rubro', ['pollos', 'lacteos','rebosados','otros']);
             $table->timestamps();
         });
         
@@ -28,3 +29,12 @@ return new class extends Migration
         Schema::dropIfExists('products');
     }
 };
+
+
+/**
+ *
+ *  Corregir los numeros de montos y dinero a la derecha
+ *  Agregar rubros de productos.
+ *  Busqueda de producto por descripcion
+ *  Filtrar productos por rubros
+ */

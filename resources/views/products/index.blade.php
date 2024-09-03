@@ -8,7 +8,11 @@
                 {{ $message }}
             </div>
         @endif
-
+        <form action="">
+            <label for="">Buscar Producto</label>
+            <input type="text" placeholder="Bucar Producto">
+            <button>Buscar</button>
+        </form>
         <div class="card">
             <div class="card-header">Lista de productos</div>
             <div class="card-body">

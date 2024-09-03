@@ -86,4 +86,16 @@ public function movimientos($id)
         'facturaClienteProductos' => $product->facturaClienteProductos
     ]);
 }
+
+    public function showSearch(Request $request)    
+    {    
+        $product=Product::where('descripcion', '=',$request->descripcion)->first();
+        if ($product){
+            return view('products.movimientos', [
+                'product' => $product
+            ]);
+        }else 
+            return redirect()->route('product.viewSearch')
+            ->withErrors("Producto no encontrado.");
+    }
 }
