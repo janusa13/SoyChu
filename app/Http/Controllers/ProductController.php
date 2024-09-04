@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\IngresoProducto;
-
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -14,17 +14,18 @@ use App\Http\Requests\UpdateProductRequest;
 class ProductController extends Controller
 {
  
-    public function index() : View
-    {
-        
-        $products = Product::latest()->paginate(6);
+public function index(Request $request) : View
+{
+    $search = $request->input('search');
 
-        
+    $products = Product::when($search, function ($query, $search) {
+        return $query->where('descripcion', 'like', '%' . $search . '%');
+    })->latest()->paginate(6);
 
-        return view('products.index', [
-            'products' => $products
-        ]);
-    }
+    return view('products.index', [
+        'products' => $products
+    ]);
+}
 
 
     public function create() : View
