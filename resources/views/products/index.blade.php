@@ -9,7 +9,7 @@
             </div>
         @endif
         <form action="{{ route('products.index') }}" method="GET">
-            <label for="search">Buscar Producto</label>
+            <label for="search">Buscar Producto: </label>
             <input type="text" name="search" placeholder="Buscar Producto" value="{{ request('search') }}">
             <button class="btn btn-outline-primary" type="submit">Buscar</button>
         </form>
@@ -45,15 +45,13 @@
                         @empty
                             <td colspan="5">
                                 <span class="text-danger">
-                                    <strong>No Product Found!</strong>
+                                    <strong>No se han encontrado productos!</strong>
                                 </span>
                             </td>
                         @endforelse
                     </tbody>
-                  </table>
-
-                  {{ $products->links() }}
-
+                    </table>
+                    {{ $products->links() }}
             </div>
         </div>
     </div>    

@@ -13,19 +13,18 @@ use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
- 
-public function index(Request $request) : View
-{
-    $search = $request->input('search');
 
-    $products = Product::when($search, function ($query, $search) {
-        return $query->where('descripcion', 'like', '%' . $search . '%');
-    })->latest()->paginate(6);
-
-    return view('products.index', [
-        'products' => $products
-    ]);
-}
+    public function index(Request $request) : View
+    {
+        $search = $request->input('search');
+        $products = Product::when($search, function ($query, $search) {
+            return $query->where('descripcion', 'like', '%' . $search . '%');
+        })->latest()->paginate(6);
+        
+        return view('products.index', [
+            'products' => $products
+        ]);
+    }
 
 
     public function create() : View
@@ -38,7 +37,7 @@ public function index(Request $request) : View
     {
         Product::create($request->all());
         return redirect()->route('products.index')
-                ->withSuccess('New product is added successfully.');
+                ->withSuccess('Nuevo producto agregado con exito.');
     }
 
     public function show(Product $product) : View
@@ -61,7 +60,7 @@ public function index(Request $request) : View
     {
         $product->update($request->all());
         return redirect()->back()
-                ->withSuccess('Product is updated successfully.');
+                ->withSuccess('Producto editado exitosamente.');
     }
 
 
@@ -69,24 +68,24 @@ public function index(Request $request) : View
     {
         $product->delete();
         return redirect()->route('products.index')
-                ->withSuccess('Product is deleted successfully.');
+                ->withSuccess('Producto eliminado exitosamente.');
     }
 
-public function movimientos($id)
-{
-    $product = Product::with([
-        'ingresoProductos.factura.proveedor',
-        'envios.sucursal',
-        'facturaClienteProductos.facturaCliente.cliente'
-    ])->findOrFail($id);
-
-    return view('products.movimientos', [
-        'product' => $product,
-        'ingresoProductos' => $product->ingresoProductos,
-        'envios' => $product->envios,
-        'facturaClienteProductos' => $product->facturaClienteProductos
-    ]);
-}
+    public function movimientos($id)
+    {
+        $product = Product::with([
+            'ingresoProductos.factura.proveedor',
+            'envios.sucursal',
+            'facturaClienteProductos.facturaCliente.cliente'
+        ])->findOrFail($id);
+        
+        return view('products.movimientos', [
+            'product' => $product,
+            'ingresoProductos' => $product->ingresoProductos,
+            'envios' => $product->envios,
+            'facturaClienteProductos' => $product->facturaClienteProductos
+        ]);
+    }
 
     public function showSearch(Request $request)    
     {    
