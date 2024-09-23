@@ -21,7 +21,7 @@
                     <div class="mb-3 row">
                         <label for="nombre" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ old('nombre') }}">
+                            <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
                                 @if ($errors->has('nombre'))
                                     <span class="text-danger">{{ $errors->first('nombre') }}</span>
                                 @endif
@@ -31,7 +31,7 @@
                     <div class="mb-3 row">
                         <label for="telefono" class="col-md-4 col-form-label text-md-end text-start">Telefono</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" name="telefono" value="{{ old('telefono') }}">
+                            <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" name="telefono" value="{{ old('telefono') }}" required>
                                 @if ($errors->has('telefono'))
                                     <span class="text-danger">{{ $errors->first('telefono') }}</span>
                                 @endif
@@ -41,7 +41,7 @@
                     <div class="mb-3 row">
                         <label for="direccionComercial" class="col-md-4 col-form-label text-md-end text-start">Direccion Comercial</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control @error('direccionComercial') is-invalid @enderror" id="direccionComercial" name="direccionComercial" value="{{ old('direccionComercial') }}">
+                            <input type="text" class="form-control @error('direccionComercial') is-invalid @enderror" id="direccionComercial" name="direccionComercial" value="{{ old('direccionComercial') }}" required >
                                 @if ($errors->has('direccionComercial'))
                                     <span class="text-danger">{{ $errors->first('direccionComercial') }}</span>
                                 @endif
@@ -51,7 +51,7 @@
                     <div class="mb-3 row">
                         <label for="CUIT" class="col-md-4 col-form-label text-md-end text-start">CUIT</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control @error('CUIT') is-invalid @enderror" id="CUIT" name="CUIT" value="{{ old('CUIT') }}">
+                            <input type="number" class="form-control @error('CUIT') is-invalid @enderror" id="CUIT" name="CUIT" value="{{ old('CUIT') }}" required >
                                 @if ($errors->has('CUIT'))
                                     <span class="text-danger">{{ $errors->first('CUIT') }}</span>
                                 @endif
@@ -61,7 +61,7 @@
                         <div class="mb-3 row">
                         <label for="direccionComercial" class="col-md-4 col-form-label text-md-end text-start">Ciudad</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control @error('Ciudad') is-invalid @enderror" id="Ciudad" name="ciudad" value="{{ old('Ciudad') }}">
+                            <input type="text" class="form-control @error('Ciudad') is-invalid @enderror" id="Ciudad" name="ciudad" value="{{ old('Ciudad') }}" required >
                                 @if ($errors->has('Ciudad'))
                                     <span class="text-danger">{{ $errors->first('Ciudad') }}</span>
                                 @endif

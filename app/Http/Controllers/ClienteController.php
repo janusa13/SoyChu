@@ -32,6 +32,13 @@ class ClienteController extends Controller
         return redirect()->route('clientes.index')
             ->withSucces('Cliente agregado exitosamente');
     }
+
+    public function destroy(Cliente $cliente) : RedirectResponse
+    {
+        $Cliente->delete();
+        return redirect()->route('clientes.index')
+                ->withSuccess('Cliente eliminado exitosamente.');
+    }
 }
 
 

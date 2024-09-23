@@ -22,6 +22,7 @@
                         <tr>
                             <th scope="col">N.</th>
                             <th scope="col">Descripción</th>
+                            <th scope="col">Rubro</th>
                             <th scope="col">Total Cantidad CJ</th>
                             <th scope="col">Acciones</th>
                         </tr>
@@ -31,12 +32,13 @@
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $product->descripcion }}</td>
-                            <td>{{ $product->cantidad }}</td>
+                            <td>{{$product->rubro}}</td>
+                            <td class="text-end" >{{ $product->cantidad }}</td>
                             <td>
                                 <form action="{{ route('products.destroy', $product->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
+                                    <a  href="{{ route('products.edit', $product->id) }}" class="btn  btn-primary btn-sm "><i class="bi bi-pencil-square"></i> Editar</a>
                                     <a href="{{ route('products.movimientos', $product->id) }}" class="btn btn-info btn-sm"><i class="bi bi-journal-text"></i> Movimientos</a>   
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Quieres borrar este producto?');"><i class="bi bi-trash"></i> Borrar</button>
                                 </form>

@@ -20,7 +20,7 @@
                     <div class="mb-3 row">
                         <label for="descripcion" class="col-md-4 col-form-label text-md-end text-start">Producto:</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" value="{{ old('descripcion') }}">
+                            <input type="text" class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" value="{{ old('descripcion') }}">
                             @if ($errors->has('descripcion'))
                                 <span class="text-danger">{{ $errors->first('descripcion') }}</span>
                             @endif
@@ -31,10 +31,10 @@
                         <div class="col-md-6">
                             <select name="rubro" class="form-control" required>
                                 <option value="">Selecionar Rubro </option>
-                                <option value="primero">Pollos</option>
-                                <option value="segundo">Lacteos</option>
-                                <option value="tercero">Rebosados</option>
-                                <option value="tercero">Otros...</option>
+                                <option value="Pollos">Pollos</option>
+                                <option value="Lacteos">Lacteos</option>
+                                <option value="Rebosados">Rebosados</option>
+                                <option value="Otros...">Otros...</option>
                             </select>
                         </div>
                     </div>

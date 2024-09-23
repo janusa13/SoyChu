@@ -1,0 +1,4 @@
+SOYCHU.
+
+SoyChu es un sistema dirgido al control
+y generacion de facturas para la distribuidora de deribados del pollo SoyChu

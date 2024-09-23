@@ -94,7 +94,7 @@
                                 <td>{{ $facturaClienteProducto->facturaCliente->numero }}</td>
                                 <td>{{ $facturaClienteProducto->facturaCliente->cliente->nombre }}</td>
                                 <td>{{ $facturaClienteProducto->cantidad_cj }}</td>
-                                <td>{{ $facturaClienteProducto->precio }}</td>
+                                <td class="text-end">${{ $facturaClienteProducto->precio }}</td>
                                 <td>{{ $facturaClienteProducto->cantidad_cj * $facturaClienteProducto->precio }}</td>
                                 <td>{{ $facturaClienteProducto->facturaCliente->fecha }}</td>
                                 <td><a href="{{ route('facturaCliente.generatePDF', $facturaClienteProducto->facturaCliente->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Generar Factura</a></td>

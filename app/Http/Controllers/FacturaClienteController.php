@@ -57,7 +57,7 @@ public function store(Request $request)
         $product = Product::findOrFail($productId);
         $cantidadSolicitada = $request->cantidadCJ[$key];
 
-        $product->decrement('cantidad', $cantidadSolicitada);
+        $product->decrement('cantidad', $canti6dadSolicitada);
 
         $subtotal = $request->precio[$key] * $cantidadSolicitada;
         $totalFactura += $subtotal;

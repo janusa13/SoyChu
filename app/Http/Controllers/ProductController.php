@@ -26,7 +26,6 @@ class ProductController extends Controller
         ]);
     }
 
-
     public function create() : View
     {
         return view('products.create');
@@ -37,8 +36,9 @@ class ProductController extends Controller
     {
         Product::create($request->all());
         return redirect()->route('products.index')
-                ->withSuccess('Nuevo producto agregado con exito.');
+            ->withSuccess('Nuevo producto agregado con exito.');
     }
+
 
     public function show(Product $product) : View
     {

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('descripcion');
             $table->float('cantidad')->default(0);
-            $table->enum('rubro', ['pollos', 'lacteos','rebosados','otros']);
+            $table->enum('rubro', ['Pollos', 'Lacteos','Rebosados','Otros...']);
             $table->timestamps();
         });
         
