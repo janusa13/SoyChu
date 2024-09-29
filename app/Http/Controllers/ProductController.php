@@ -71,23 +71,58 @@ class ProductController extends Controller
                 ->withSuccess('Producto eliminado exitosamente.');
     }
 
-    public function movimientos($id)
-    {
-        $product = Product::with([
-            'ingresoProductos.factura.proveedor',
-            'envios.sucursal',
-            'facturaClienteProductos.facturaCliente.cliente'
-        ])->findOrFail($id);
-        
-        return view('products.movimientos', [
-            'product' => $product,
-            'ingresoProductos' => $product->ingresoProductos,
-            'envios' => $product->envios,
-            'facturaClienteProductos' => $product->facturaClienteProductos
-        ]);
+public function movimientos(Request $request, $id)
+{
+    $fechaDesde = $request->input('fechaDesde');
+    $fechaHasta = $request->input('fechaHasta');
+
+    $product = Product::with([
+        'ingresoProductos.factura.proveedor',
+        'envios.sucursal',
+        'facturaClienteProductos.facturaCliente.cliente'
+    ])->findOrFail($id);
+
+    $ingresoProductos = $product->ingresoProductos();
+    $envios = $product->envios();
+    $facturaClienteProductos = $product->facturaClienteProductos();
+
+    if ($fechaDesde && $fechaHasta) {
+        $ingresoProductos = $ingresoProductos->whereHas('factura', function($query) use ($fechaDesde, $fechaHasta) {
+            $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
+        });
+
+        $envios = $envios->whereBetween('enviado_at', [$fechaDesde, $fechaHasta]);
+
+        $facturaClienteProductos = $facturaClienteProductos->whereHas('facturaCliente', function($query) use ($fechaDesde, $fechaHasta) {
+            $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
+        });
     }
 
-    public function showSearch(Request $request)    
+    // Obtener los resultados
+    $ingresoProductos = $ingresoProductos->get();
+    $envios = $envios->get();
+    $facturaClienteProductos = $facturaClienteProductos->get();
+
+    // Calcular los totales
+    $totalIngresoCJ = $ingresoProductos->sum('CantidadCJ');
+    $totalEnvioCJ = $envios->sum('cantidad');
+    $totalFacturadoCJ = $facturaClienteProductos->sum('cantidad_cj');
+
+    return view('products.movimientos', [
+        'product' => $product,
+        'ingresoProductos' => $ingresoProductos,
+        'envios' => $envios,
+        'facturaClienteProductos' => $facturaClienteProductos,
+        'fechaDesde' => $fechaDesde,
+        'fechaHasta' => $fechaHasta,
+        'totalIngresoCJ' => $totalIngresoCJ,
+        'totalEnvioCJ' => $totalEnvioCJ,
+        'totalFacturadoCJ' => $totalFacturadoCJ
+    ]);
+}
+
+
+public function showSearch(Request $request)    
     {    
         $product=Product::where('descripcion', '=',$request->descripcion)->first();
         if ($product){

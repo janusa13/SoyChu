@@ -8,6 +8,7 @@ use App\Models\Cliente;
 use App\Models\Product;
 use App\Models\IngresoProducto;
 use App\Models\FacturaClienteProducto;
+use Illuminate\View\View;
 use PDF;
 
 class FacturaClienteController extends Controller
@@ -19,6 +20,24 @@ class FacturaClienteController extends Controller
         
         return view('facturas.createVenta', compact('clientes', 'products'));
     }
+
+public function index(Request $request) : View
+{
+    $fechaDesde = $request->input('desde');
+    $fechaHasta = $request->input('hasta');
+
+    $facturas = FacturaCliente::with(['cliente', 'facturaClienteProductos.product']) // Cargar las relaciones correctamente
+                                ->when($fechaDesde && $fechaHasta, function ($query) use ($fechaDesde, $fechaHasta) {
+                                    return $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
+                                })
+                                ->latest()
+                                ->paginate(6);
+    
+    return view('facturas.index', [
+        'facturas' => $facturas
+    ]);
+}
+
 
 public function store(Request $request)
 {
@@ -93,4 +112,19 @@ public function store(Request $request)
 
         return $pdf->download('factura_cliente_'.$factura->numero.'.pdf');
     }
+
+    
+public function showSearch(Request $request): View
+{
+    $fechaDesde = $request->desde;
+    $fechaHasta = $request->hasta;
+
+    if ($fechaDesde && $fechaHasta) {
+        $facturas = FacturaCliente::whereBetween('fecha', [$fechaDesde, $fechaHasta])->get();
+    } else {
+        $facturas = FacturaCliente::all();
+    }
+
+    return redirect()->route('facturas.index')->withErrors("No hay facturas registradas en esas fechas");
+}
 }

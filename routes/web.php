@@ -61,6 +61,8 @@ Route::get('/factura/{facturaId}/pdf', [FacturaClienteController::class, 'genera
 
 Route::get('products/{id}/movimientos', [ProductController::class, 'movimientos'])->name('products.movimientos');
 
+Route::get('facturas',[FacturaClienteController::class,'index'])->name('facturas.index');
+
 });
 
 require __DIR__.'/auth.php';

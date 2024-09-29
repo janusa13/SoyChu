@@ -9,6 +9,22 @@
                 {{ $message }}
             </div>
         @endif
+    <form method="GET" action="{{ route('products.movimientos', $product->id) }}" class="mb-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="fechaDesde">Fecha Desde:</label>
+                    <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" value="{{ request('fechaDesde') }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="fechaHasta">Fecha Hasta:</label>
+                    <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" value="{{ request('fechaHasta') }}">
+                </div>
+                <div class="col-md-2 align-self-end">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </div>
+        </form>
+        
         <div class="card">
             <div class="card-header">Movimientos del Producto: {{ $product->descripcion }}</div>
             <div class="card-body">
@@ -33,7 +49,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $ingreso->factura->numero }}</td>
                                 <td>{{ $ingreso->CantidadCJ }}</td>
-                                <td>{{ $ingreso->factura->proveedor->nombre }}</td>
+                                <td>{{ $ingreso->factura->proveedor->nombre ?? 'Proveedor no asignado' }}</td>
                                 <td>{{ $ingreso->factura->fecha }}</td>
                             </tr>
                         @empty
@@ -45,6 +61,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                 <p><strong>Total Ingresos CJ:</strong> {{ $totalIngresoCJ }}</p>
                 <hr>
                 <h5>Envíos</h5>
                 <table class="table table-striped table-bordered">
@@ -73,6 +90,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                 <p><strong>Total Envíos CJ:</strong> {{ $totalEnvioCJ }}</p>
                 <hr>
                 <h2>Facturas Generadas</h2>
                 <table class="table table-striped table-bordered">
@@ -108,6 +126,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                 <p><strong>Total Facturado CJ:</strong> {{ $totalFacturadoCJ }}</p>
                 <hr>
                 <a href="{{ route('products.index') }}" class="btn btn-primary">Volver a Productos</a>
             </div>

@@ -45,4 +45,5 @@ class FacturaController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Factura registrada con éxito.');
     }
+
 }
