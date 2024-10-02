@@ -1,0 +1,149 @@
+Proyecto de Gestión de Productos 
+
+Descripción General 
+
+Este proyecto es una aplicación web desarrollada con Laravel que permite gestionar productos en una base de datos. Ofrece una interfaz para visualizar, agregar, editar, eliminar y realizar un seguimiento detallado de los movimientos de cada producto, como ingresos de stock, envíos a sucursales, y la generación de facturas. 
+
+  
+
+El objetivo del sistema es dar una solución sencilla y eficiente para llevar un control del inventario y los movimientos asociados a cada producto, permitiendo a los usuarios gestionar su stock de manera eficiente y generar facturas en formato PDF. 
+
+Funcionalidades Actuales 
+
+Gestión de Productos: 
+
+Visualización de todos los productos disponibles. 
+
+Búsqueda de productos por descripción (palabra o letra). 
+
+Agregar, editar y eliminar productos desde la interfaz. 
+
+ 
+
+Movimientos del Producto: 
+
+Seguimiento de ingresos de stock. 
+
+Registro de envíos a sucursales. 
+
+Visualización y generación de facturas relacionadas con los productos. 
+
+ 
+
+Búsqueda Avanzada: 
+
+Permite buscar productos según una palabra clave que esté contenida en su descripción. Por ejemplo, al buscar "pollo", se muestran todos los productos relacionados, como "Pechuga de pollo", "Pata de pollo", etc. 
+
+Generación de Facturas en PDF: 
+
+Generación automática de facturas para cada producto, que se pueden descargar en formato PDF. 
+
+ 
+
+Requisitos Previos 
+
+Antes de levantar el proyecto, asegúrate de tener instalado: 
+
+PHP (versión 8.0 o superior). 
+
+Composer. 
+
+MySQL u otro sistema de base de datos compatible. 
+
+Node.js y npm (para la gestión de paquetes frontend). 
+
+Un servidor web como Apache  
+
+Pasos para Levantar el Proyecto 
+
+Clonar el repositorio: https://github.com/janusa13/SoyChu.git 
+
+  
+
+bash 
+
+Copiar código 
+
+git clone  
+
+cd gestion-productos 
+
+Instalar las dependencias de PHP: 
+
+  
+
+bash 
+
+Copiar código 
+
+composer install 
+
+Instalar las dependencias de JavaScript: 
+
+  
+
+bash 
+
+Copiar código 
+
+npm install 
+
+npm run dev 
+
+Configurar el archivo .env: 
+
+  
+
+Renombra el archivo .env.example a .env. 
+
+Configura tus credenciales de base de datos, correo electrónico y otros parámetros necesarios en el archivo .env. 
+
+Generar la clave de la aplicación: 
+
+  
+
+bash 
+
+Copiar código 
+
+php artisan key:generate 
+
+Ejecutar las migraciones y seeders: Este paso creará las tablas necesarias en tu base de datos y, si es necesario, llenará algunas con datos por defecto. 
+
+  
+
+bash 
+
+Copiar código 
+
+php artisan migrate --seed 
+
+Levantar el servidor local: Para iniciar la aplicación, puedes usar el servidor integrado de Laravel: 
+
+  
+
+bash 
+
+Copiar código 
+
+php artisan serve 
+
+Acceder a la aplicación: Abre tu navegador y accede a http://localhost:8000 para interactuar con la aplicación. 
+
+  
+
+Mejoras y Actualizaciones Futuras 
+
+A medida que el proyecto crece, se planean varias mejoras que se implementarán en versiones futuras: 
+
+ 
+
+Dashboard de Estadísticas: 
+
+Añadir un panel con estadísticas que muestre el movimiento de los productos, como los más vendidos, el estado del inventario, y otros informes importantes para la gestión del stock. 
+
+ 
+
+Notificaciones por Correo: 
+
+Implementar notificaciones automáticas por correo cuando se alcancen ciertos umbrales de stock o cuan
