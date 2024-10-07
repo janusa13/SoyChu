@@ -18,7 +18,7 @@
                 </div>
             </div>
         </form>
-        <!-- Gráfico de productos más vendidos -->
+
         <div class="card mb-4">
             <div class="card-header">Productos más vendidos</div>
             <div class="card-body">
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <!-- Gráfico de ingresos de productos -->
+
         <div class="card">
             <div class="card-header">Ingresos de productos</div>
             <div class="card-body">
@@ -39,9 +39,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+   
     const labelsVendidos = {!! json_encode($productosMasVendidos->pluck('descripcion')) !!};
+    const fechasVendidos = {!! json_encode($productosMasVendidos->pluck('fecha')) !!}; 
+
     const dataVendidos = {
-        labels: labelsVendidos,
+        labels: labelsVendidos.map((descripcion, index) => `${descripcion} (${fechasVendidos[index]})`),
         datasets: [{
             label: 'Cantidad Vendida',
             data: {!! json_encode($productosMasVendidos->pluck('total_vendido')) !!},
@@ -59,6 +62,16 @@
                 y: {
                     beginAtZero: true
                 }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            const index = tooltipItem.dataIndex;
+                            return `${labelsVendidos[index]} (${fechasVendidos[index]}): ${tooltipItem.formattedValue}`;
+                        }
+                    }
+                }
             }
         }
     };
@@ -68,9 +81,12 @@
         configVendidos
     );
 
+    
     const labelsIngresados = {!! json_encode($productosIngresados->pluck('descripcion')) !!};
+    const fechasIngresados = {!! json_encode($productosIngresados->pluck('fecha')) !!}; 
+
     const dataIngresados = {
-        labels: labelsIngresados,
+        labels: labelsIngresados.map((descripcion, index) => `${descripcion} (${fechasIngresados[index]})`),
         datasets: [{
             label: 'Cantidad Ingresada',
             data: {!! json_encode($productosIngresados->pluck('total_ingresado')) !!},
@@ -87,6 +103,16 @@
             scales: {
                 y: {
                     beginAtZero: true
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            const index = tooltipItem.dataIndex;
+                            return `${labelsIngresados[index]} (${fechasIngresados[index]}): ${tooltipItem.formattedValue}`;
+                        }
+                    }
                 }
             }
         }

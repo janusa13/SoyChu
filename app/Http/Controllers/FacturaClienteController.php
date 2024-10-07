@@ -8,6 +8,8 @@ use App\Models\Cliente;
 use App\Models\Product;
 use App\Models\IngresoProducto;
 use App\Models\FacturaClienteProducto;
+use App\Mail\FacturaClienteMail; // Importa tu mailable
+use Illuminate\Support\Facades\Mail; // Importa Mail
 use Illuminate\View\View;
 use PDF;
 
@@ -101,8 +103,9 @@ public function store(Request $request)
     return redirect()->route('facturaCliente.generatePDF', ['facturaId' => $factura->id]);
 }
 
-    public function generatePDF($facturaId)
-    {
+public function generatePDF($facturaId)
+{
+    try {
         $factura = FacturaCliente::with(['facturaClienteProductos.product'])->findOrFail($facturaId);
 
         $cliente = $factura->cliente;
@@ -111,11 +114,23 @@ public function store(Request $request)
             return $producto->precio * $producto->cantidad_cj;
         });
 
+        // Generar el PDF
         $pdf = PDF::loadView('pdf.factura', compact('factura', 'cliente', 'productos', 'total'));
 
-        return $pdf->download('factura_cliente_'.$factura->numero.'.pdf');
-    }
+        // Guardar el PDF en una ruta temporal
+        $pdfPath = storage_path('app/temp/factura_cliente_' . $factura->numero . '.pdf');
+        $pdf->save($pdfPath);
 
+        // Enviar el PDF por correo
+        Mail::to($cliente->correoElectronico)->send(new FacturaClienteMail($cliente, $factura, $pdf));
+
+        // Descargar el PDF
+        return response()->download($pdfPath)->deleteFileAfterSend(true);
+    } catch (\Exception $e) {
+        // Si ocurre un error, mostrar mensaje de error
+        return back()->with('error', 'Hubo un problema: ' . $e->getMessage());
+    }
+}
     
 public function showSearch(Request $request): View
 {
