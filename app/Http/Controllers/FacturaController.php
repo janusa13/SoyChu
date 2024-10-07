@@ -29,7 +29,7 @@ class FacturaController extends Controller
         $factura->fecha = $request->fecha;
         $factura->fecha_vencimiento = $request->fecha_vencimiento;
         $factura->save();
-                    if ($request->fecha_vencimiento > $request->fecha) {
+                    if ($request->fecha_vencimiento < $request->fecha) {
             return redirect()->back()->withErrors("La fecha de vencimiento no puede ser menor a la fecha de emicion de la factura");
         }
         for ($i = 0; $i < count($request->product_id); $i++) {

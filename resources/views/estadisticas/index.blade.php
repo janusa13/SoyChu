@@ -3,6 +3,21 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-8">
+                <form method="GET" action="{{ route('estadisticas.index') }}">
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="desde">Desde:</label>
+                    <input type="date" name="desde" id="desde" class="form-control" value="{{ request('desde') }}">
+                </div>
+                <div class="col">
+                    <label for="hasta">Hasta:</label>
+                    <input type="date" name="hasta" id="hasta" class="form-control" value="{{ request('hasta') }}">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mt-4">Filtrar</button>
+                </div>
+            </div>
+        </form>
         <!-- Gráfico de productos más vendidos -->
         <div class="card mb-4">
             <div class="card-header">Productos más vendidos</div>
@@ -24,7 +39,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    // Datos para el gráfico de productos más vendidos
     const labelsVendidos = {!! json_encode($productosMasVendidos->pluck('descripcion')) !!};
     const dataVendidos = {
         labels: labelsVendidos,
@@ -49,13 +63,11 @@
         }
     };
 
-    // Crear el gráfico de productos más vendidos
     const productosMasVendidosChart = new Chart(
         document.getElementById('productosMasVendidosChart'),
         configVendidos
     );
 
-    // Datos para el gráfico de ingresos de productos
     const labelsIngresados = {!! json_encode($productosIngresados->pluck('descripcion')) !!};
     const dataIngresados = {
         labels: labelsIngresados,
@@ -80,7 +92,6 @@
         }
     };
 
-    // Crear el gráfico de ingresos de productos
     const productosIngresadosChart = new Chart(
         document.getElementById('productosIngresadosChart'),
         configIngresados
