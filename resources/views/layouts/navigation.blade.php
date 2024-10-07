@@ -37,6 +37,7 @@
                     <x-nav-link :href="route('estadisticas.index')" :active="request()->routeIs('estadisticas-index')">
                         {{ __('Estadisticas de ventas') }}
                     </x-nav-link>
+                    
                 </div>
             </div>
 
