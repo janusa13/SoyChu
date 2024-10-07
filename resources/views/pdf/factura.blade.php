@@ -164,8 +164,8 @@
                         </tr>
                     @foreach ($productos as $producto)
                         <tr>
-                            <td>{{ $producto->producto->id }}</td>
-                            <td>{{ $producto->producto->descripcion }}</td>
+                            <td>{{ $producto->product->id }}</td>
+                            <td>{{ $producto->product->descripcion }}</td>
                             <td>{{ $producto->cantidad_cj }}</td>
                             <td>Unidad</td>
                             <td>{{ $producto->precio }}</td>

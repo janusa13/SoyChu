@@ -34,6 +34,9 @@
                     <x-nav-link :href="route('factura.create')" :active="request()->routeIs('factura.create')">
                         {{ __('Registrar entrada de Stock') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('estadisticas.index')" :active="request()->routeIs('estadisticas-index')">
+                        {{ __('Estadisticas de ventas') }}
+                    </x-nav-link>
                 </div>
             </div>
 

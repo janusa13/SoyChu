@@ -53,6 +53,9 @@ public function store(Request $request)
         'precio' => 'required|array'
     ]);
 
+            if ($request->fecha_vencimiento < $request->fecha) {
+            return redirect()->back()->withErrors("La fecha de vencimiento no puede ser menor a la fecha de emicion de la factura");
+        }
     foreach ($request->product_id as $key => $productId) {
         $product = Product::findOrFail($productId);
         $cantidadSolicitada = $request->cantidadCJ[$key];
@@ -100,7 +103,7 @@ public function store(Request $request)
 
     public function generatePDF($facturaId)
     {
-        $factura = FacturaCliente::with(['facturaClienteProductos.producto'])->findOrFail($facturaId);
+        $factura = FacturaCliente::with(['facturaClienteProductos.product'])->findOrFail($facturaId);
 
         $cliente = $factura->cliente;
         $productos = $factura->facturaClienteProductos;
