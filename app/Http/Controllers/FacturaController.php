@@ -23,7 +23,7 @@ class FacturaController extends Controller
     {
  
         $factura = new Factura();
-        $factura->proveedor_id = $request->proveedor;
+        $factura->proveedor = $request->proveedor;
         $factura->numero = $request->numero;
         $factura->condicion_pago = $request->condicion_pago;
         $factura->fecha = $request->fecha;
@@ -42,7 +42,7 @@ class FacturaController extends Controller
             $productoIngreso->precio = $request->precio[$i];
             $productoIngreso->save();
             $product = Product::findOrFail($request->product_id[$i]);
-            $product->increment('cantidad', $request->cantidadCJ[$i]);  
+            $productoIngreso->increment('cantidadCJ', $request->cantidadCJ[$i]);  
         }
 
         return redirect()->route('products.index')->with('success', 'Factura registrada con éxito.');

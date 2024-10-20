@@ -35,6 +35,6 @@ class Factura extends Model
 
         public function proveedor()
     {
-        return $this->belongsTo(Proveedor::class, 'proveedor_id'); 
+        return $this->belongsTo(Proveedor::class, 'proveedor'); 
     }
 }

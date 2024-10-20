@@ -36,7 +36,7 @@
                             <td>{{ $cliente->correoElectronico }}</td>
                             <td>{{ $cliente->celularLaboral }}</td>
                             <td>
-                                <form action="" method="post">
+                                <form action="{{route('clientes.destroy',$cliente->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i>Informacion</a>

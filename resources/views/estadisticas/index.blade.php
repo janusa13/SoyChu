@@ -1,3 +1,8 @@
+<?php
+    $dateHoy = date('Y-m-d');
+    $dateBefore = date('Y-m-d', strtotime('-1 month'));
+?>
+
 @extends('dashboard')
 
 @section('content')
@@ -7,11 +12,11 @@
             <div class="row mb-4">
                 <div class="col">
                     <label for="desde">Desde:</label>
-                    <input type="date" name="desde" id="desde" class="form-control" value="{{ request('desde') }}">
+                    <input type="date" name="desde" id="desde" class="form-control" value="<?php echo($dateBefore) ;?>">
                 </div>
                 <div class="col">
                     <label for="hasta">Hasta:</label>
-                    <input type="date" name="hasta" id="hasta" class="form-control" value="{{ request('hasta') }}">
+                    <input type="date" name="hasta" id="hasta" class="form-control" value="<?php echo($dateHoy) ;?>">
                 </div>
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary mt-4">Filtrar</button>
