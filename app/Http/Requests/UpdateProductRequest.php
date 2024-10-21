@@ -23,6 +23,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'descripcion' => 'nullable|string'
+            
         ];
     }
 }

@@ -5,6 +5,7 @@ use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\ContractsView\View;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\UpdateClienteRequest;
 
 
 class ClienteController extends Controller
@@ -38,6 +39,20 @@ class ClienteController extends Controller
         $cliente->delete();
         return redirect()->route('clientes.index')
                 ->withSuccess('Cliente eliminado exitosamente.');
+    }
+
+    public function edit(Cliente $cliente)
+    {
+        return view('clientes.edit', [
+            'cliente' => $cliente
+        ]);
+    }
+
+    public function update(UpdateClienteRequest $request, Cliente $cliente) : RedirectResponse
+    {
+        $cliente->update($request->all());
+        return redirect()->back()
+                ->withSuccess('Cliente editado exitosamente.');
     }
 }
 

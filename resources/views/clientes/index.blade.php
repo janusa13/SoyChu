@@ -40,7 +40,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i>Informacion</a>
-                                    <a href="" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
+                                    <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Quieres borrar este proveedor?');"><i class="bi bi-trash"></i> Borrar</button>
                                 </form>
                             </td>
