@@ -10,13 +10,25 @@ use App\Http\Request\StoreSucursalRequest;
 
 class SucursalController extends Controller
 {
+    public function index(Request $request)
+    {
+    $search = $request->input('search');
+    $sucursal = Sucursal::when($search, function ($query, $search) {
+        return $query->where('nombre', 'like', '%' . $search . '%');
+    })->latest()->paginate(6);
+    
+    return view('sucursals.index', [
+        'sucursals' => $sucursal
+    ]);
+}
+    /*
     public function index() : View
     {
         return view('sucursals.index',[
             'sucursals' => Sucursal::latest()->paginate(6)
         ]);
     }
-
+    */
     public function show(Sucursal $sucursal) : View
     {
         return view('sucursals.show', [

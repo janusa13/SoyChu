@@ -23,7 +23,7 @@ class FacturaController extends Controller
     {
  
         $factura = new Factura();
-        $factura->proveedor = $request->proveedor;
+        $factura->proveedor_id = $request->proveedor;
         $factura->numero = $request->numero;
         $factura->condicion_pago = $request->condicion_pago;
         $factura->fecha = $request->fecha;
