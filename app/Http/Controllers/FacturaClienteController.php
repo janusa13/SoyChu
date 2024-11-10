@@ -116,11 +116,13 @@ public function generatePDF($facturaId)
 
         $pdf = PDF::loadView('pdf.factura', compact('factura', 'cliente', 'productos', 'total'));
 
-        $pdfPath = storage_path('app/temp/factura_cliente_' . $factura->numero . '.pdf');
+        // Define the path to save the PDF
+        $pdfPath = storage_path('app/public/temp/' . $factura->numero . '.pdf');
+
+        // Save the PDF to the correct path
         $pdf->save($pdfPath);
 
-        Mail::to($cliente->correoElectronico)->send(new FacturaClienteMail($cliente, $factura, $pdf));
-
+        // Return the response to download the PDF and delete after sending
         return response()->download($pdfPath)->deleteFileAfterSend(true);
     } catch (\Exception $e) {
         return back()->with('error', 'Hubo un problema: ' . $e->getMessage());
