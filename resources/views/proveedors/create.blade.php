@@ -3,8 +3,12 @@
 @section('content')
 
 <div class="row justify-content-center mt-3">
+            @if($errors->any())
+            <div class="alert alert-warning" role="alert">
+                {{$errors->first()}}
+            </div>
+        @endif
     <div class="col-md-8">
-
         <div class="card">
             <div class="card-header">
                 <div class="float-start">
@@ -31,7 +35,7 @@
                     <div class="mb-3 row">
                         <label for="telefono" class="col-md-4 col-form-label text-md-end text-start">Telefono</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" name="telefono" value="{{ old('telefono') }}">
+                            <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" name="telefono" value="{{ old('telefono') }}" pattern="[0-9]*">
                                 @if ($errors->has('telefono'))
                                     <span class="text-danger">{{ $errors->first('telefono') }}</span>
                                 @endif
@@ -47,17 +51,15 @@
                                 @endif
                             </div>
                     </div>
-
                     <div class="mb-3 row">
-                        <label for="CUIT" class="col-md-4 col-form-label text-md-end text-start">CUIT</label>
+                        <label for="cuit" class="col-md-4 col-form-label text-md-end text-start">CUIT</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control @error('CUIT') is-invalid @enderror" id="CUIT" name="CUIT" value="{{ old('CUIT') }}">
-                                @if ($errors->has('CUIT'))
-                                    <span class="text-danger">{{ $errors->first('CUIT') }}</span>
-                                @endif
-                            </div>
+                            <input type="text" class="form-control @error('cuit') is-invalid @enderror" id="cuit" name="CUIT" value="{{ old('CUIT') }}">
+                            @if ($errors->has('cuit'))
+                                <span class="text-danger">{{ $errors->first('cuit') }}</span>
+                            @endif
+                        </div>
                     </div>
-
                         <div class="mb-3 row">
                         <label for="direccionComercial" class="col-md-4 col-form-label text-md-end text-start">Ciudad</label>
                         <div class="col-md-6">

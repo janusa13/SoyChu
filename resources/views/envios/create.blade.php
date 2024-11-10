@@ -1,3 +1,7 @@
+<?php
+    $dateHoy = date('Y-m-d');
+?>
+
 @extends('../dashboard')
 @section('content')
 <div class="container">
@@ -37,7 +41,7 @@
 
         <div class="mb-3">
             <label for="shipped_at" class="form-label">Fecha de Envío</label>
-            <input type="date" name="enviado_at" id="shipped_at" class="form-control" required>
+            <input type="date" name="enviado_at" id="shipped_at" class="form-control" value="<?php echo $dateHoy; ?>" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Registrar Envío</button>

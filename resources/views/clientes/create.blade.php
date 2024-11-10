@@ -23,7 +23,7 @@
                             <div class="mb-3 row">
                                 <label for="nombre" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ old('nombre') }}">
+                                    <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ old('nombre') }}" >
                                         @if ($errors->has('nombre'))
                                             <span class="text-danger">{{ $errors->first('nombre') }}</span>
                                         @endif
@@ -72,7 +72,7 @@
                             <div class="mb-3 row">
                                 <label for="codigoPostal" class="col-md-4 col-form-label text-md-end text-start">Codigo Postal</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control @error('codigoPostal') is-invalid @enderror" id="codigoPostal" name="codigoPostal" value="{{ old('codigoPostal') }}">
+                                    <input type="text" class="form-control @error('codigoPostal') is-invalid @enderror" id="codigoPostal" name="codigoPostal" value="{{ old('codigoPostal') }}" pattern="[0-9]*">
                                         @if ($errors->has('codigoPostal'))
                                             <span class="text-danger">{{ $errors->first('codigoPostal') }}</span>
                                         @endif
@@ -85,7 +85,7 @@
                             <div class="mb-3 row">
                                 <label for="numeroCelular" class="col-md-4 col-form-label text-md-end text-start">Numero de celular personal </label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control @error('numeroCelular') is-invalid @enderror" id="numeroCelular" name="numeroCelular" value="{{ old('numeroCelular') }}">
+                                    <input type="text" class="form-control @error('numeroCelular') is-invalid @enderror" id="numeroCelular" name="numeroCelular" value="{{ old('numeroCelular') }}" pattern="[0-9]*">
                                         @if ($errors->has('numeroCelular'))
                                             <span class="text-danger">{{ $errors->first('numeroCelular') }}</span>
                                         @endif
@@ -94,7 +94,7 @@
                             <div class="mb-3 row">
                                 <label for="celularLaboral" class="col-md-4 col-form-label text-md-end text-start">Numero de celular laboral</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control @error('celularLaboral') is-invalid @enderror" id="celularLaboral" name="celularLaboral" value="{{ old('celularLaboral') }}">
+                                    <input type="text" class="form-control @error('celularLaboral') is-invalid @enderror" id="celularLaboral" name="celularLaboral" value="{{ old('celularLaboral') }}" pattern="[0-9]*">
                                         @if ($errors->has('celularLaboral'))
                                             <span class="text-danger">{{ $errors->first('celularLaboral') }}</span>
                                         @endif
@@ -103,7 +103,7 @@
                             <div class="mb-3 row">
                                 <label for="correoElectronico" class="col-md-4 col-form-label text-md-end text-start">Correo Electronio</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control @error('correoElectronico') is-invalid @enderror" id="correoElectronico" name="correoElectronico" value="{{ old('correoElectronico') }}">
+                                    <input type="email" class="form-control @error('correoElectronico') is-invalid @enderror" id="correoElectronico" name="correoElectronico" value="{{ old('correoElectronico') }}">
                                         @if ($errors->has('correoElectronico'))
                                             <span class="text-danger">{{ $errors->first('correoElectronico') }}</span>
                                         @endif
@@ -134,7 +134,7 @@
                             <div class="mb-3 row">
                                 <label for="cuit" class="col-md-4 col-form-label text-md-end text-start">CUIT</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control @error('cuit') is-invalid @enderror" id="cuit" name="cuit" value="{{ old('cuit') }}">
+                                    <input type="text" class="form-control @error('cuit') is-invalid @enderror" id="cuit" name="cuit" value="{{ old('cuit') }}" pattern="[0-9]*">
                                         @if ($errors->has('cuit'))
                                             <span class="text-danger">{{ $errors->first('cuit') }}</span>
                                         @endif

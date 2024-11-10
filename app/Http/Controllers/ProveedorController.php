@@ -24,9 +24,18 @@ class ProveedorController extends Controller
 
     public function store(StoreProveedorRequest $request) : RedirectResponse
     {
-        Proveedor::create($request->all());
-        return redirect()->route('proveedors.index')
-            ->withSuccess('Nuevo Proveedor agregado.');
+
+        
+    if (Proveedor::where('CUIT', $request->cuit)->exists()) {
+        return redirect()->route('proveedors.create')
+            ->withErrors('CUIT ya registrado');
+    }
+
+    // Crear el proveedor
+    Proveedor::create($request->all());
+
+    return redirect()->route('proveedors.index')
+        ->withSuccess('Nuevo Proveedor agregado.');
     }
 
     public function destroy(Proveedor $proveedor) : RedirectResponse

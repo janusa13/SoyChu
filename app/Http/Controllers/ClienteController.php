@@ -29,9 +29,19 @@ class ClienteController extends Controller
     }
 
     public function store(Request $request){
-        Cliente::create($request->all());
-        return redirect()->route('clientes.index')
-            ->withSucces('Cliente agregado exitosamente');
+
+
+    if (Cliente::where('cuit', $request->cuit)->exists()) {
+        return redirect()->route('clientes.create')
+            ->withErrors(['cuit' => 'CUIT ya registrado'])
+            ->withInput();
+    }
+
+    // Crear el cliente
+    Cliente::create($request->all());
+
+    return redirect()->route('clientes.index')
+        ->with('success', 'Cliente agregado exitosamente');
     }
 
         public function destroy(Cliente $cliente) : RedirectResponse
@@ -51,7 +61,7 @@ class ClienteController extends Controller
     public function update(UpdateClienteRequest $request, Cliente $cliente) : RedirectResponse
     {
         $cliente->update($request->all());
-        return redirect()->back()
+        return redirect()->route('clientes.index')
                 ->withSuccess('Cliente editado exitosamente.');
     }
 }

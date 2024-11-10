@@ -25,7 +25,7 @@ class StoreProveedorRequest extends FormRequest
             'nombre' => 'required|string|max:250',
             'telefono' => 'nullable|string',
             'direccionComercial'=>'nullable|string',
-            'CUIT'=>'required|integer',
+            'CUIT' => 'required|unique:proveedors,cuit',
             'ciudad'=>'nullable|string'
         ];
     }
