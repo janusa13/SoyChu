@@ -36,10 +36,10 @@
                         <div class="col-md-6">
                             <select name="rubro" class="form-control" required>
                                 <option value="">Selecionar Rubro </option>
-                                <option value="primero">Pollos</option>
-                                <option value="segundo">Lacteos</option>
-                                <option value="tercero">Rebosados</option>
-                                <option value="tercero">Otros...</option>
+                                <option value="pollos">Pollos</option>
+                                <option value="lacteos">Lacteos</option>
+                                <option value="rebosados">Rebosados</option>
+                                <option value="otros">Otros...</option>
                             </select>
                         </div>
                     </div>

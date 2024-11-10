@@ -22,6 +22,7 @@
                         <tr>
                             <th scope="col">N.</th>
                             <th scope="col">Descripción</th>
+                            <th scope="col">Rubro</th>
                             <th scope="col">Total Cantidad CJ</th>
                             <th scope="col">Acciones</th>
                         </tr>
@@ -31,6 +32,7 @@
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $product->descripcion }}</td>
+                            <td>{{ $product->rubro }}</td>
                             <td>{{ $product->cantidad }}</td>
                             <td>
                                 <form action="{{ route('products.destroy', $product->id) }}" method="post">
