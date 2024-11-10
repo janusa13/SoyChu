@@ -9,6 +9,11 @@
                 {{ $message }}
             </div>
         @endif
+        <form action="{{ route('sucursals.index') }}" method="GET">
+            <label for="search">Buscar Sucursales: </label>
+            <input type="text" name="search" placeholder="Buscar Sucursales" value="{{ request('search') }}">
+            <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </form>
         <div class="card">
             <div class="card-header">Lista de sucursales</div>
             <div class="card-body">

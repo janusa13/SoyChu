@@ -10,12 +10,25 @@ use App\Http\Requests\UpdateClienteRequest;
 
 class ClienteController extends Controller
 {
-    public function index() 
+    public function index(Request $request)
+        {
+        $search = $request->input('search');
+        $clientes = Cliente::when($search, function ($query, $search) {
+            return $query->where('nombre', 'like', '%' . $search . '%');
+        })->latest()->paginate(6);
+        
+        return view('clientes.index', [
+            'clientes' => $clientes
+        ]);
+    }
+
+    
+    /*public function index() 
     {
         return view('clientes.index',[
             'clientes' =>Cliente::latest()->paginate(6)
         ]);
-    }
+    }*/
 
     public function show(Cliente $cliente)
     {

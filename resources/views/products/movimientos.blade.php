@@ -36,7 +36,7 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">N°</th>aaaaaaaaa
+                            <th scope="col">N°</th>
                             <th scope="col">Factura</th>
                             <th scope="col">Cantidad CJ</th>
                             <th scope="col">Proveedor</th>

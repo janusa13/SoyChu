@@ -6,17 +6,30 @@ use App\Models\Proveedor;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreProveedorRequest;
-use App\Http\Controllers\Request;
+use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
 {
+
+    public function index(Request $request)
+    {
+    $search = $request->input('search');
+    $proveedors = Proveedor::when($search, function ($query, $search) {
+        return $query->where('nombre', 'like', '%' . $search . '%');
+    })->latest()->paginate(6);
+    
+    return view('proveedors.index', [
+        'proveedors' => $proveedors
+    ]);
+}
+    /*    
     public function index() : View
     {
         return view('proveedors.index', [
             'proveedors' => Proveedor::latest()->paginate(6)
         ]);
     }
-
+    */
     public function create() : View
     {
         return view('proveedors.create');
