@@ -33,7 +33,7 @@
             <label for="product_id" class="form-label">Metodo de Pago</label>
                             <select name="condicion_pago" class="form-control" required>
                                 <option value="">Seleccione un metodo de pago</option>
-                                    <option value="dinero en efectivo">Dinero en fectivo</option>
+                                    <option value="dinero en efectivo">Dinero en efectivo</option>
                                     <option value="tarjeta de debito">Tarjeta de debito</option>
                                     <option value="tarjeta de credito">Tarjeta de credito</option>
                                     <option value="transferencia bancaria">Transferencia Bancaria</option>

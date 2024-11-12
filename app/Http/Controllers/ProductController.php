@@ -82,53 +82,58 @@ public function index(Request $request) : View
                 ->withSuccess('Producto eliminado exitosamente.');
     }
 
-public function movimientos(Request $request, $id)
-{
-    $fechaHasta = $request->input('fechaHasta');
-    $fechaDesde = $request->input('fechaDesde');
-    $product = Product::with([
-    'ingresoProductos.factura.proveedor',
-
-        'envios.sucursal',
-        'facturaClienteProductos.facturaCliente.cliente'
-    ])->findOrFail($id);
-
-    $ingresoProductos = $product->ingresoProductos();
-    $envios = $product->envios();
-    $facturaClienteProductos = $product->facturaClienteProductos();
-
-    if ($fechaDesde && $fechaHasta) {
-        $ingresoProductos = $ingresoProductos->whereHas('factura', function($query) use ($fechaDesde, $fechaHasta) {
-            $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
-        });
-
-        $envios = $envios->whereBetween('enviado_at', [$fechaDesde, $fechaHasta]);
-
-        $facturaClienteProductos = $facturaClienteProductos->whereHas('facturaCliente', function($query) use ($fechaDesde, $fechaHasta) {
-            $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
-        });
+    public function movimientos(Request $request, $id)
+    {
+        $fechaDesde = $request->input('fechaDesde');
+        $fechaHasta = $request->input('fechaHasta');
+    
+        $product = Product::with([
+            'ingresoProductos.factura.proveedor',
+            'envios.sucursal',
+            'facturaClienteProductos.facturaCliente.cliente'
+        ])->findOrFail($id);
+    
+        $ingresoProductos = collect(); 
+        $envios = collect();           
+        $facturaClienteProductos = collect(); 
+    
+        $totalIngresoCJ = 0;
+        $totalEnvioCJ = 0;
+        $totalFacturadoCJ = 0;
+    
+        
+        if ($fechaDesde && $fechaHasta) {
+            $ingresoProductos = $product->ingresoProductos()
+                ->whereHas('factura', function($query) use ($fechaDesde, $fechaHasta) {
+                    $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
+                })->get();
+    
+            $envios = $product->envios()
+                ->whereBetween('enviado_at', [$fechaDesde, $fechaHasta])
+                ->get();
+    
+            $facturaClienteProductos = $product->facturaClienteProductos()
+                ->whereHas('facturaCliente', function($query) use ($fechaDesde, $fechaHasta) {
+                    $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
+                })->get();
+    
+            $totalIngresoCJ = $ingresoProductos->sum('CantidadCJ');
+            $totalEnvioCJ = $envios->sum('cantidad');
+            $totalFacturadoCJ = $facturaClienteProductos->sum('cantidad_cj');
+        }
+    
+        return view('products.movimientos', [
+            'product' => $product,
+            'ingresoProductos' => $ingresoProductos,
+            'envios' => $envios,
+            'facturaClienteProductos' => $facturaClienteProductos,
+            'fechaDesde' => $fechaDesde,
+            'fechaHasta' => $fechaHasta,
+            'totalIngresoCJ' => $totalIngresoCJ,
+            'totalEnvioCJ' => $totalEnvioCJ,
+            'totalFacturadoCJ' => $totalFacturadoCJ
+        ]);
     }
-
-    $ingresoProductos = $ingresoProductos->get();
-    $envios = $envios->get();
-    $facturaClienteProductos = $facturaClienteProductos->get();
-
-    $totalIngresoCJ = $ingresoProductos->sum('CantidadCJ');
-    $totalEnvioCJ = $envios->sum('cantidad');
-    $totalFacturadoCJ = $facturaClienteProductos->sum('cantidad_cj');
-
-    return view('products.movimientos', [
-        'product' => $product,
-        'ingresoProductos' => $ingresoProductos,
-        'envios' => $envios,
-        'facturaClienteProductos' => $facturaClienteProductos,
-        'fechaDesde' => $fechaDesde,
-        'fechaHasta' => $fechaHasta,
-        'totalIngresoCJ' => $totalIngresoCJ,
-        'totalEnvioCJ' => $totalEnvioCJ,
-        'totalFacturadoCJ' => $totalFacturadoCJ
-    ]);
-}
 
 
 public function showSearch(Request $request)    
