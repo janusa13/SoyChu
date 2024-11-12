@@ -58,5 +58,24 @@ class ProveedorController extends Controller
             ->withSuccess('Proveedor borrado exitosamente.');
     }
 
+        public function edit(Proveedor $proveedor) : View
+    {
+        return view('proveedors.edit', [
+            'proveedor' => $proveedor
+        ]);
+    }
+
+        public function update(Request $request, Proveedor $proveedor) : RedirectResponse
+    {
+            if (Proveedor::where('cuit', $request->CUIT)->exists()) {
+        return redirect()->route('proveedors.edit', $proveedor->id)
+            ->withErrors(['CUIT' => 'CUIT ya registrado'])
+            ->withInput();
+    }
+        $proveedor->update($request->all());
+        return redirect()->back()
+                ->withSuccess('Proveedor actualizada con exito.');
+    }
+
 
 }

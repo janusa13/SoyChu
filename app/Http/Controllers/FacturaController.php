@@ -42,7 +42,7 @@ class FacturaController extends Controller
             $productoIngreso->precio = $request->precio[$i];
             $productoIngreso->save();
             $product = Product::findOrFail($request->product_id[$i]);
-            $product->increment('cantidad', $request->cantidadCJ[$i]);  
+
         }
 
         return redirect()->route('products.index')->with('success', 'Factura registrada con éxito.');

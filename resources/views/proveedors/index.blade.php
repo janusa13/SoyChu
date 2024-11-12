@@ -42,6 +42,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Quieres borrar este proveedor?');"><i class="bi bi-trash"></i> Borrar</button>
+                                    <a href="{{ route('proveedors.edit', $proveedor->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
                                 </form>
                             </td>
                         </tr>

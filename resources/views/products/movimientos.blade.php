@@ -30,9 +30,8 @@
             <div class="card-body">
                 <h5 class="card-title">Detalles del Producto</h5>
                 <p><strong>Descripción:</strong> {{ $product->descripcion }}</p>
-                <p><strong>Cantidad Total:</strong> {{ $product->cantidad }}</p>
                 <hr>
-                <h5>Ingresos de Stock</h5>
+                <h3 class="p-2"><strong>Compras: </strong></h3>
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -63,7 +62,7 @@
                 </table>
                  <p><strong>Total Ingresos CJ:</strong> {{ $totalIngresoCJ }}</p>
                 <hr>
-                <h5>Envíos</h5>
+                <h3 class="p-2"><strong>Envios: </strong></h3>
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -92,7 +91,7 @@
                 </table>
                  <p><strong>Total Envíos CJ:</strong> {{ $totalEnvioCJ }}</p>
                 <hr>
-                <h2>Facturas Generadas</h2>
+                <h3 class="p-2"><strong>Ventas: </strong></h3>
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>

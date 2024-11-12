@@ -9,6 +9,7 @@ use App\Models\Sucursal;
 use App\Models\Envio;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class EnvioController extends Controller
 {
@@ -25,26 +26,34 @@ class EnvioController extends Controller
         return view('envios.create', compact('products', 'sucursals'));
     }
 
-    public function store(Request $request) : RedirectResponse
-    {
-        $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'sucursal_id' => 'required|exists:sucursals,id',
-            'cantidad' => 'required|integer|min:1',
-            'enviado_at' => 'required|date',
-        ]);
+public function store(Request $request) : RedirectResponse
+{
+    $request->validate([
+        'product_id' => 'required|exists:products,id',
+        'sucursal_id' => 'required|exists:sucursals,id',
+        'cantidad' => 'required|integer|min:1',
+        'enviado_at' => 'required|date',
+    ]);
 
-        $product = Product::findOrFail($request->product_id);
+    $productId = $request->product_id;
+    $cantidadSolicitada = $request->cantidad;
 
-        
-        if ($product->cantidad < $request->cantidad) {
-            return redirect()->back()->withErrors('No hay suficiente stock para este producto.');
-        }
+    $cantidadDisponible = DB::table('ingresoproducto')
+        ->where('ingresoproducto.productID', $productId)
+        ->sum('CantidadCJ')
+        - DB::table('factura_cliente_productos')
+        ->where('factura_cliente_productos.product_id', $productId)
+        ->sum('cantidad_cj');
 
-        $product->decrement('cantidad', $request->cantidad);
-
-        Envio::create($request->all());
-
-        return redirect()->route('envios.index')->withSuccess('El envío se ha registrado exitosamente.');
+    if ($cantidadDisponible < $cantidadSolicitada) {
+        return redirect()->back()->withErrors('No hay suficiente stock para este producto.');
     }
+
+    
+
+
+    Envio::create($request->all());
+
+    return redirect()->route('envios.index')->withSuccess('El envío se ha registrado exitosamente.');
+}
 }

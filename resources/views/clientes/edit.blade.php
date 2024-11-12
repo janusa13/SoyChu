@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="float-start">
-                    Registrar Cliente
+                    Editar Cliente
                 </div>
                 <div class="float-end">
                     <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-sm">&larr; Atras</a>

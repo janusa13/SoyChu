@@ -7,6 +7,7 @@ use App\Models\IngresoProducto;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -14,18 +15,27 @@ use App\Http\Requests\UpdateProductRequest;
 class ProductController extends Controller
 {
 
-    public function index(Request $request) : View
-    {
-        $search = $request->input('search');
-        $products = Product::when($search, function ($query, $search) {
-            return $query->where('descripcion', 'like', '%' . $search . '%');
-        })->latest()->paginate(6);
-        
-        return view('products.index', [
-            'products' => $products
-        ]);
-    }
-
+public function index(Request $request) : View
+{
+    $search = $request->input('search');
+    
+    $products = Product::select([
+        'products.*',
+        DB::raw('(
+            COALESCE((SELECT SUM(CantidadCJ) FROM ingresoproducto WHERE ingresoproducto.productID = products.id), 0) - 
+            COALESCE((SELECT SUM(cantidad_cj) FROM factura_cliente_productos WHERE factura_cliente_productos.product_id = products.id), 0) -
+            COALESCE((SELECT SUM(cantidad) FROM envios WHERE envios.product_id = products.id), 0)
+        ) as total_cantidad_cj')
+    ])
+    ->when($search, function ($query, $search) {
+        return $query->where('descripcion', 'like', '%' . $search . '%');
+    })
+    ->latest()
+    ->paginate(6);
+    return view('products.index', [
+        'products' => $products
+    ]);
+}
 
     public function create() : View
     {

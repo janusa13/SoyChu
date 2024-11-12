@@ -1,3 +1,7 @@
+<?php
+    $dateHoy = date('Y-m-d');
+    $dateVencimiento = date('Y-m-d', strtotime('+1 month'));
+?>
 @extends('../dashboard')
 @section('content')
 <div class="container">
@@ -39,12 +43,12 @@
 
         <div class="mb-3">
             <label for="fecha" class="form-label">Fecha</label>
-            <input type="date" name="fecha" id="fecha" class="form-control" required>
+            <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo($dateHoy) ;?>" required>
         </div>
 
         <div class="mb-3">
             <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento</label>
-            <input type="date" name="fecha_vencimiento" id="fecha_vencimiento" class="form-control" required>
+            <input type="date" name="fecha_vencimiento" id="fecha_vencimiento" class="form-control" value = "<?php echo($dateVencimiento) ;?>" required>
         </div>
 
         <div id="productos-container">

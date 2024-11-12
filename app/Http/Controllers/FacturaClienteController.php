@@ -10,6 +10,7 @@ use App\Models\IngresoProducto;
 use App\Models\FacturaClienteProducto;
 use App\Mail\FacturaClienteMail; // Importa tu mailable
 use Illuminate\Support\Facades\Mail; // Importa Mail
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use PDF;
 
@@ -55,18 +56,29 @@ public function store(Request $request)
         'precio' => 'required|array'
     ]);
 
-            if ($request->fecha_vencimiento < $request->fecha) {
-            return redirect()->back()->withErrors("La fecha de vencimiento no puede ser menor a la fecha de emicion de la factura");
-        }
+    // Validación de fecha de vencimiento
+    if ($request->fecha_vencimiento < $request->fecha) {
+        return redirect()->back()->withErrors("La fecha de vencimiento no puede ser menor a la fecha de emisión de la factura");
+    }
+
+    // Validar cantidades disponibles para cada producto solicitado
     foreach ($request->product_id as $key => $productId) {
-        $product = Product::findOrFail($productId);
         $cantidadSolicitada = $request->cantidadCJ[$key];
 
-        if ($product->cantidad < $cantidadSolicitada) {
-            return redirect()->back()->withErrors("No hay suficiente stock para el producto: {$product->descripcion}.");
+        // Calcular la cantidad disponible usando ingresos y salidas de productos
+        $cantidadDisponible = DB::table('ingresoproducto')
+            ->where('ingresoproducto.productID', $productId)
+            ->sum('CantidadCJ')
+            - DB::table('factura_cliente_productos')
+            ->where('factura_cliente_productos.product_id', $productId)
+            ->sum('cantidad_cj');
+
+        if ($cantidadDisponible < $cantidadSolicitada) {
+            return redirect()->back()->withErrors("No hay suficiente stock para el producto ID: {$productId}.");
         }
     }
 
+    // Crear la factura
     $factura = FacturaCliente::create([
         'cliente_id' => $request->cliente,
         'numero' => $request->numero,
@@ -77,16 +89,16 @@ public function store(Request $request)
     ]);
 
     $totalFactura = 0;
+
+    // Guardar productos en la factura y actualizar stock
     foreach ($request->product_id as $key => $productId) {
-        $product = Product::findOrFail($productId);
         $cantidadSolicitada = $request->cantidadCJ[$key];
-
-        $product->decrement('cantidad', $cantidadSolicitada);
-
+        
+        // Calcular el subtotal para cada producto
         $subtotal = $request->precio[$key] * $cantidadSolicitada;
         $totalFactura += $subtotal;
 
-
+        // Crear el registro en `factura_cliente_productos`
         FacturaClienteProducto::create([
             'factura_cliente_id' => $factura->id,
             'product_id' => $productId,
@@ -97,7 +109,7 @@ public function store(Request $request)
         ]);
     }
 
-
+    // Actualizar el total de la factura
     $factura->update(['facturaTotal' => $totalFactura]);
 
     return redirect()->route('facturaCliente.generatePDF', ['facturaId' => $factura->id]);
