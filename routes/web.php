@@ -28,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return redirect()->route('products.index');
+    return redirect()->route('estadisticas.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

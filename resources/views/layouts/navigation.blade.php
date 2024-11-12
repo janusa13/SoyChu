@@ -12,35 +12,34 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('estadisticas.index')" :active="request()->routeIs('estadisticas-index')">
+                        {{ __('Estadisticas de ventas') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
                         {{ __('Productos') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.index')">
+                        {{ __('Clientes') }}
                     </x-nav-link>
                     <x-nav-link :href="route('sucursal.index')" :active="request()->routeIs('sucursal.index')">
                         {{ __('Sucursales') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.index')">
-                        {{ __('Clientes') }}
+                    <x-nav-link :href="route('proveedors.index')" :active="request()->routeIs('proveedors.index')">
+                        {{ __('Proveedores') }}
                     </x-nav-link>
                     <x-nav-link :href="route('envios.index')" :active="request()->routeIs('envios.index')">
                         {{ __('Envios') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('proveedors.index')" :active="request()->routeIs('proveedors.index')">
-                        {{ __('Proveedores') }}
-                    </x-nav-link>
-
                     <x-nav-link :href="route('facturaCliente.create')" :active="request()->routeIs('facturaCliente.create')">
                         {{ __('Generar Factura') }}
                     </x-nav-link>
                     <x-nav-link :href="route('factura.create')" :active="request()->routeIs('factura.create')">
                         {{ __('Registrar entrada de Stock') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('estadisticas.index')" :active="request()->routeIs('estadisticas-index')">
-                        {{ __('Estadisticas de ventas') }}
-                    </x-nav-link>
                     
                 </div>
             </div>
-
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -55,16 +54,13 @@
                             </div>
                         </button>
                     </x-slot>
-
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Perfil') }}
                         </x-dropdown-link>
-
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">

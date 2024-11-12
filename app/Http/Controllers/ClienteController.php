@@ -73,6 +73,11 @@ class ClienteController extends Controller
 
     public function update(UpdateClienteRequest $request, Cliente $cliente) : RedirectResponse
     {
+        if (Cliente::where('cuit', $request->cuit)->exists()){
+            return redirect()->route('clientes.edit', $cliente->id)
+            ->withErrors(['cuit' => 'CUIT ya registrado'])
+            ->withInput();
+        }
         $cliente->update($request->all());
         return redirect()->route('clientes.index')
                 ->withSuccess('Cliente editado exitosamente.');

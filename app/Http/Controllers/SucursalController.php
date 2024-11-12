@@ -41,7 +41,7 @@ class SucursalController extends Controller
         return view('sucursals.create');
     }
 
-    public function store(Request $request) : RedirectResponse //AGREGARLE LA VALIDACION DE STORESUCURSALREQUEST
+    public function store(Request $request) : RedirectResponse 
     {
         Sucursal::create($request->all());
         return redirect()->route('sucursal.index')

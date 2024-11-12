@@ -14,8 +14,7 @@ class Product extends Model
     protected $fillable = [
         'id',
         'descripcion',
-        'rubro',
-        'cantidad'
+        'rubro'
     ];
 
 public function facturaClienteProductos()
