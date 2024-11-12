@@ -15,7 +15,7 @@ class SucursalController extends Controller
     $search = $request->input('search');
     $sucursal = Sucursal::when($search, function ($query, $search) {
         return $query->where('nombre', 'like', '%' . $search . '%');
-    })->latest()->paginate(6);
+    })->latest()->paginate(10)->appends(['search' => $search]);
     
     return view('sucursals.index', [
         'sucursals' => $sucursal

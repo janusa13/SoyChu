@@ -31,7 +31,8 @@ public function index(Request $request) : View
         return $query->where('descripcion', 'like', '%' . $search . '%');
     })
     ->latest()
-    ->paginate(6);
+    ->paginate(10)
+    ->appends(['search' => $search]);
     return view('products.index', [
         'products' => $products
     ]);

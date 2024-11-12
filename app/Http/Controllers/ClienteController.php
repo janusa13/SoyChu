@@ -15,7 +15,7 @@ class ClienteController extends Controller
         $search = $request->input('search');
         $clientes = Cliente::when($search, function ($query, $search) {
             return $query->where('nombre', 'like', '%' . $search . '%');
-        })->latest()->paginate(6);
+        })->latest()->paginate(10)->appends(['search' => $search]);
         
         return view('clientes.index', [
             'clientes' => $clientes

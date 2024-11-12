@@ -8,7 +8,7 @@
                 {{ $message }}
             </div>
         @endif
-        <form action="{{ route('products.index') }}" method="GET">
+        <form action="{{ route('products.index') }}" method="GET" >
             <label for="search">Buscar Producto: </label>
             <input type="text" name="search" placeholder="Buscar Producto" value="{{ request('search') }}">
             <button class="btn btn-outline-primary" type="submit">Buscar</button>

@@ -16,7 +16,7 @@ class ProveedorController extends Controller
     $search = $request->input('search');
     $proveedors = Proveedor::when($search, function ($query, $search) {
         return $query->where('nombre', 'like', '%' . $search . '%');
-    })->latest()->paginate(6);
+    })->latest()->paginate(10)->appends(['search' => $search]);
     
     return view('proveedors.index', [
         'proveedors' => $proveedors
