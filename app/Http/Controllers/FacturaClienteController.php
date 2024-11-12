@@ -119,7 +119,7 @@ public function generatePDF($facturaId)
         $pdfPath = storage_path('app/public/temp/' . $factura->numero . '.pdf');
 
         $pdf->save($pdfPath);
-
+        Mail::to($cliente->correoElectronico)->send(new FacturaClienteMail($cliente, $factura, $pdf));
         return response()->download($pdfPath)->deleteFileAfterSend(true);
     } catch (\Exception $e) {
         return back()->with('error', 'Hubo un problema: ' . $e->getMessage());
