@@ -17,10 +17,10 @@ class Product extends Model
         'rubro'
     ];
 
-public function facturaClienteProductos()
-{
-    return $this->hasMany(FacturaClienteProducto::class, 'product_id');
-}
+    public function facturaClienteProductos()
+    {
+        return $this->hasMany(FacturaClienteProducto::class, 'product_id');
+    }
 
 public function ingresoproductos()
 {

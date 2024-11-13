@@ -32,10 +32,13 @@
                         {{ __('Envios') }}
                     </x-nav-link>
                     <x-nav-link :href="route('facturaCliente.create')" :active="request()->routeIs('facturaCliente.create')">
-                        {{ __('Generar Factura') }}
+                        {{ __('Generar Venta') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('facturas.index')" :active="request()->routeIs('facturas.index')">
+                        {{ __('Listado de facturas') }}
                     </x-nav-link>
                     <x-nav-link :href="route('factura.create')" :active="request()->routeIs('factura.create')">
-                        {{ __('Registrar entrada de Stock') }}
+                        {{ __('Registrar compra de stock') }}
                     </x-nav-link>
                     
                 </div>

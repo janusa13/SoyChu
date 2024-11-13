@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\FacturaCliente;
 use App\Models\Cliente; 
 use App\Models\Product;
+use App\Models\Envios;
+use App\Models\Factura;
 use App\Models\IngresoProducto;
 use App\Models\FacturaClienteProducto;
 use App\Mail\FacturaClienteMail; // Importa tu mailable
@@ -24,22 +26,57 @@ class FacturaClienteController extends Controller
         return view('facturas.createVenta', compact('clientes', 'products'));
     }
 
-public function index(Request $request) : View
-{
-    $fechaDesde = $request->input('desde');
-    $fechaHasta = $request->input('hasta');
-
-    $facturas = FacturaCliente::with(['cliente', 'facturaClienteProductos.product']) // Cargar las relaciones correctamente
-                                ->when($fechaDesde && $fechaHasta, function ($query) use ($fechaDesde, $fechaHasta) {
-                                    return $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
-                                })
-                                ->latest()
-                                ->paginate(6);
+    public function index(Request $request): View
+    {
+        $fechaDesde = $request->input('fechaDesde');
+        $fechaHasta = $request->input('fechaHasta');
     
-    return view('facturas.index', [
-        'facturas' => $facturas
-    ]);
-}
+        $ingresoProductos = collect();
+        $facturaClienteProductos = collect();
+    
+
+        $totalIngresoCJ = 0;
+        $totalEnvioCJ = 0;
+        $totalFacturadoCJ = 0;
+    
+
+        if ($fechaDesde && $fechaHasta) {
+            $ingresoProductos = IngresoProducto::with('factura.proveedor', 'product')
+            ->whereHas('factura', function($query) use ($fechaDesde, $fechaHasta) {
+                $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
+            })
+            ->orderBy(Factura::select('fecha')
+                ->whereColumn('factura.id', 'ingresoproducto.facturaID')
+                ->limit(1), 'asc')
+            ->get();
+                
+            $facturaClienteProductos = FacturaClienteProducto::with('facturaCliente.cliente', 'product')
+            ->whereHas('facturaCliente', function($query) use ($fechaDesde, $fechaHasta) {
+                $query->whereBetween('fecha', [$fechaDesde, $fechaHasta]);
+            })
+            ->orderBy(
+                FacturaCliente::select('fecha')
+                    ->whereColumn('facturas_clientes.id', 'factura_cliente_productos.factura_cliente_id')
+                    ->limit(1), 
+                'asc'  
+            )
+            ->get();
+
+                $totalIngresoCJ = $ingresoProductos->sum('CantidadCJ');
+                $totalFacturadoCJ = $facturaClienteProductos->sum('cantidad_cj');
+        }
+    
+        return view('facturas.index', [
+            'ingresoProductos' => $ingresoProductos,
+            'facturaClienteProductos' => $facturaClienteProductos,
+            'fechaDesde' => $fechaDesde,
+            'fechaHasta' => $fechaHasta,
+            'totalIngresoCJ' => $totalIngresoCJ,
+            'totalFacturadoCJ' => $totalFacturadoCJ
+        ]);
+    }
+    
+    
 
 
 public function store(Request $request)
@@ -56,16 +93,15 @@ public function store(Request $request)
         'precio' => 'required|array'
     ]);
 
-    // Validación de fecha de vencimiento
+
     if ($request->fecha_vencimiento < $request->fecha) {
         return redirect()->back()->withErrors("La fecha de vencimiento no puede ser menor a la fecha de emisión de la factura");
     }
 
-    // Validar cantidades disponibles para cada producto solicitado
+
     foreach ($request->product_id as $key => $productId) {
         $cantidadSolicitada = $request->cantidadCJ[$key];
 
-        // Calcular la cantidad disponible usando ingresos y salidas de productos
         $cantidadDisponible = DB::table('ingresoproducto')
             ->where('ingresoproducto.productID', $productId)
             ->sum('CantidadCJ')
@@ -78,7 +114,6 @@ public function store(Request $request)
         }
     }
 
-    // Crear la factura
     $factura = FacturaCliente::create([
         'cliente_id' => $request->cliente,
         'numero' => $request->numero,
@@ -90,15 +125,15 @@ public function store(Request $request)
 
     $totalFactura = 0;
 
-    // Guardar productos en la factura y actualizar stock
+
     foreach ($request->product_id as $key => $productId) {
         $cantidadSolicitada = $request->cantidadCJ[$key];
         
-        // Calcular el subtotal para cada producto
+
         $subtotal = $request->precio[$key] * $cantidadSolicitada;
         $totalFactura += $subtotal;
 
-        // Crear el registro en `factura_cliente_productos`
+
         FacturaClienteProducto::create([
             'factura_cliente_id' => $factura->id,
             'product_id' => $productId,
@@ -109,7 +144,6 @@ public function store(Request $request)
         ]);
     }
 
-    // Actualizar el total de la factura
     $factura->update(['facturaTotal' => $totalFactura]);
 
     return redirect()->route('facturaCliente.generatePDF', ['facturaId' => $factura->id]);

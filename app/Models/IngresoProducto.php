@@ -17,9 +17,9 @@ class IngresoProducto extends Model
         return $this->belongsTo(Factura::class, 'facturaID');
     }
 
-    public function producto()
+    public function product()
     {
-        return $this->belongsTo(Product::class, 'id'); // Especifica 'productID' aquí
+        return $this->belongsTo(Product::class, 'id');
     }
 
 
